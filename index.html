@@ -3,224 +3,46 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Тетяна Опря — бізнес-консалтинг, психологія, таро</title>
-<meta name="description" content="Тетяна Опря: консалтинг для власників бізнесу, програма «Бізнес з розумом», курс таро, програма «8 кроків» для жінок і матерів військових.">
-<meta name="theme-color" content="#2f4a52">
-<meta property="og:title" content="Тетяна Опря — бізнес-консалтинг, психологія, таро">
-<meta property="og:description" content="Консалтинг для власників бізнесу, психологічна практика та навчання таро.">
-<meta property="og:image" content="img/IMG_1114.jpg">
+<title>Тетяна Опря — бізнес-консалтинг і психолог, Київ та онлайн</title>
+<meta name="description" content="Бізнес-консалтинг для власників і команд, програма «Бізнес з розумом», атмахілінг, «8 кроків». Первинна консультація — 60 хвилин, онлайн або в Києві.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#22383e">
+<link rel="canonical" href="https://tatianaopriapro-ai.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Тетяна Опря">
+<meta property="og:locale" content="uk_UA">
+<meta property="og:url" content="https://tatianaopriapro-ai.github.io/">
+<meta property="og:title" content="Тетяна Опря — бізнес-консалтинг і психолог, Київ та онлайн">
+<meta property="og:description" content="Бізнес-консалтинг для власників і команд, програма «Бізнес з розумом», атмахілінг, «8 кроків». Первинна консультація — 60 хвилин, онлайн або в Києві.">
+<meta property="og:image" content="https://tatianaopriapro-ai.github.io/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" href="img/bird.png">
 <link rel="apple-touch-icon" href="img/bird.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Forum&family=Comfortaa:wght@300;400;600&family=Golos+Text:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  /* Кольори та шрифти з пакета логотипа OPRIA */
-  :root{
-    --teal:#2f4a52;      /* темний фон макетів */
-    --teal-2:#3c5a63;
-    --sage:#86a795;      /* мʼятний логотип */
-    --sage-d:#5f8270;    /* мʼятний для тексту на світлому */
-    --mint:#e8f1ea;      /* світлий фон основного логотипа */
-    --paper:#f6f7f3;
-    --ink:#24363c;
-    --muted:#5b6d70;
-    --line:#d3ddd5;
-    --serif:"Forum", "Times New Roman", serif;
-    --round:"Comfortaa", system-ui, sans-serif;
-    --sans:"Golos Text", system-ui, sans-serif;
-    --wrap:1180px;
-    color-scheme:light;
-  }
-
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-  body{background:var(--paper);color:var(--ink);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
-  img{display:block;max-width:100%}
-  a{color:inherit}
-  h1,h2,h3{font-family:var(--serif);font-weight:400;text-wrap:balance}
-  p{text-wrap:pretty}
-  :focus-visible{outline:2px solid var(--sage-d);outline-offset:3px}
-  .skip{position:absolute;left:-999px;top:8px;background:var(--teal);color:#fff;padding:10px 16px;z-index:200}
-  .skip:focus{left:8px}
-  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 32px}
-
-  /* підпис у стилі «TATIANA» з логотипа */
-  .cap{font:400 12px/1.4 var(--round);letter-spacing:.32em;text-transform:uppercase;color:var(--sage-d)}
-  .on-dark .cap{color:var(--sage)}
-
-  /* ластівка з логотипа, фарбується кольором тексту */
-  .bird{display:block;width:36px;aspect-ratio:1/1;background:currentColor;-webkit-mask:url(img/bird.png) center/contain no-repeat;mask:url(img/bird.png) center/contain no-repeat}
-
-  /* хвиля з логотипа */
-  .wave{display:block;width:100%;height:28px;overflow:visible}
-  .wave path{fill:none;stroke:var(--sage);stroke-width:1.2;vector-effect:non-scaling-stroke}
-
-  .btn{display:inline-flex;align-items:center;gap:12px;min-height:50px;padding:0 26px;background:var(--teal);color:#f3f6f2;text-decoration:none;font:500 15px/1 var(--sans);border-radius:2px;transition:background .25s}
-  .btn:hover{background:var(--teal-2)}
-  .btn.light{background:var(--paper);color:var(--teal)}
-  .btn.light:hover{background:#fff}
-  .tlink{font:500 15px/1.4 var(--sans);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px;transition:color .2s,border-color .2s}
-  .tlink:hover{color:var(--sage-d)}
-
-  /* ── шапка ── */
-  header{position:sticky;top:0;z-index:50;background:rgba(246,247,243,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-  .bar{display:flex;align-items:center;justify-content:space-between;height:74px;gap:24px}
-  .bar .logo img{height:42px;width:auto}
-  nav{display:flex;align-items:center;gap:30px;font-size:15px}
-  nav a{text-decoration:none;color:var(--muted);transition:color .2s}
-  nav a:hover{color:var(--ink)}
-  nav .btn{min-height:42px;padding:0 20px;font-size:14px;color:#f3f6f2}
-  nav .btn:hover{color:#fff}
-
-  /* ── перший екран ── */
-  .hero{padding:72px 0 96px}
-  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:72px;align-items:center}
-  .hero h1{font-size:clamp(56px,8vw,112px);line-height:.95;letter-spacing:-.01em;margin:22px 0 0;color:var(--teal)}
-  .hero .wave{margin:18px 0 34px;max-width:520px}
-  .lead{font-size:19px;line-height:1.6;max-width:30em;color:var(--ink)}
-  .hero .acts{display:flex;align-items:center;gap:28px;flex-wrap:wrap;margin-top:40px}
-  .hero figure{position:relative}
-  .hero figure img{width:100%;height:min(74vh,660px);min-height:420px;object-fit:cover;object-position:50% 30%}
-  .hero figcaption{position:absolute;left:-1px;bottom:-1px;background:var(--paper);padding:14px 22px 0 0;font:400 13px/1.4 var(--round);letter-spacing:.06em;color:var(--muted)}
-
-  /* ── напрями: сітка як в Instagram ── */
-  .sect{padding:110px 0}
-  .sect-head{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;margin-bottom:56px}
-  .sect-head h2{font-size:clamp(40px,5vw,66px);line-height:1;color:var(--teal);margin-top:16px}
-  .sect-head > p{color:var(--muted);max-width:28em;justify-self:end}
-
-  .feed{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-  .feed > *{aspect-ratio:1/1;position:relative;overflow:hidden}
-  .feed img{width:100%;height:100%;object-fit:cover}
-  .post{display:flex;flex-direction:column;justify-content:space-between;padding:34px;text-decoration:none}
-  .post h3{font-size:clamp(28px,2.6vw,38px);line-height:1.05;margin-bottom:12px}
-  .post p{font-size:15px;line-height:1.55;max-width:22em;opacity:.85}
-  .post .more{display:inline-block;margin-top:18px;font:400 12px/1 var(--round);letter-spacing:.24em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:5px}
-  .post:hover .more{opacity:.7}
-  .p-teal{background:var(--teal);color:#eef3ef}
-  .p-sage{background:var(--sage);color:#17282e}
-  .p-mint{background:var(--mint);color:var(--teal)}
-  .p-white{background:#fff;color:var(--teal);border:1px solid var(--line)}
-
-  /* ── про мене ── */
-  .about{background:var(--mint)}
-  .about .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:80px;align-items:start}
-  .about .pics{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-  .about .pics img{width:100%;object-fit:cover}
-  .about .pics img:first-child{grid-column:span 2;aspect-ratio:4/4.4;object-position:50% 25%}
-  .about .pics img:not(:first-child){aspect-ratio:1/1.15}
-  .about h2{font-size:clamp(40px,5vw,66px);line-height:1;color:var(--teal);margin:16px 0 30px}
-  .says{font:400 clamp(24px,2.4vw,31px)/1.3 var(--serif);color:var(--teal);margin-bottom:28px}
-  .about p.t{color:var(--ink);max-width:34em;margin-bottom:18px}
-  .creds{list-style:none;margin-top:44px;border-top:1px solid #c7d6cb}
-  .creds li{display:flex;justify-content:space-between;gap:20px;padding:16px 0;border-bottom:1px solid #c7d6cb;font-size:16px}
-  .creds li span:last-child{font:400 13px/1.6 var(--round);letter-spacing:.06em;color:var(--muted);text-align:right}
-  .certs{display:flex;gap:10px;margin-top:28px;flex-wrap:wrap}
-  .certs a{display:block;background:#fff;padding:5px;border:1px solid #c7d6cb;transition:border-color .2s}
-  .certs a:hover{border-color:var(--sage-d)}
-  .certs img{height:72px;width:auto}
-
-  /* ── магазин ── */
-  .shop{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
-  .prod{text-decoration:none;display:block}
-  .prod .im{aspect-ratio:1/1;overflow:hidden;background:var(--mint)}
-  .prod .im img{width:100%;height:100%;object-fit:cover;transition:transform .8s ease}
-  .prod:hover .im img{transform:scale(1.03)}
-  .prod h3{font-size:25px;line-height:1.15;color:var(--teal);margin:20px 0 8px}
-  .prod .row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;border-top:1px solid var(--line);padding-top:12px;margin-top:14px}
-  .prod .price{font:400 22px/1 var(--serif)}
-  .prod .buy{font:400 12px/1 var(--round);letter-spacing:.24em;text-transform:uppercase;color:var(--sage-d)}
-  .shop-foot{margin-top:52px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;color:var(--muted);font-size:15px}
-
-  /* ── відгук ── */
-  .review{background:var(--teal);color:#eef3ef}
-  .review .wrap{display:grid;grid-template-columns:.42fr 1fr;gap:72px;align-items:center}
-  .review figure img{width:100%;aspect-ratio:3/4;object-fit:cover}
-  blockquote{font:400 clamp(25px,2.6vw,35px)/1.3 var(--serif);margin:26px 0 30px}
-  .who{font-size:15px;color:#c3d3c9}
-  .who b{font-weight:500;color:#eef3ef}
-
-  /* ── відео ── */
-  .video .wrap{display:grid;grid-template-columns:.75fr 1.25fr;gap:64px;align-items:center}
-  .video h2{font-size:clamp(36px,4.2vw,56px);line-height:1.02;color:var(--teal);margin:16px 0 20px}
-  .video p{color:var(--muted);margin-bottom:28px;max-width:26em}
-  .yt{position:relative;display:block;width:100%;aspect-ratio:16/9;border:0;padding:0;background:#000;cursor:pointer;overflow:hidden;color:#fff;text-align:left;font:inherit}
-  .yt img{width:100%;height:100%;object-fit:cover;opacity:.85;transition:opacity .3s}
-  .yt:hover img{opacity:1}
-  .yt .play{position:absolute;left:50%;top:50%;width:78px;height:78px;margin:-39px 0 0 -39px;border-radius:50%;background:rgba(246,247,243,.92);display:grid;place-items:center}
-  .yt .play svg{width:22px;height:22px;fill:var(--teal);margin-left:4px}
-  .yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-
-  /* ── контакти ── */
-  .contact{padding:120px 0 110px;text-align:center}
-  .contact .bird{width:64px;margin:0 auto 26px;color:var(--sage-d)}
-  .contact h2{font-size:clamp(46px,6.4vw,90px);line-height:1;color:var(--teal)}
-  .contact .wave{max-width:440px;margin:22px auto 30px}
-  .contact p{max-width:31em;margin:0 auto;color:var(--muted);font-size:18px}
-  .contact .acts{margin-top:38px;display:flex;justify-content:center}
-  .direct{display:flex;justify-content:center;flex-wrap:wrap;gap:12px 40px;margin-top:44px;font-size:16px}
-  .direct a{text-decoration:none;border-bottom:1px solid var(--line)}
-  .direct a:hover{border-color:var(--teal)}
-  .soc{display:flex;justify-content:center;flex-wrap:wrap;gap:10px 28px;margin-top:22px;font:400 12px/1 var(--round);letter-spacing:.22em;text-transform:uppercase}
-  .soc a{text-decoration:none;color:var(--sage-d)}
-  .soc a:hover{color:var(--teal)}
-
-  footer{background:var(--teal);color:#c3d3c9;font-size:14px;padding:64px 0 40px}
-  footer .wrap{display:grid;grid-template-columns:auto 1fr;gap:40px 64px;align-items:end}
-  footer .flogo{width:230px;height:auto}
-  .req{display:flex;flex-direction:column;gap:3px;line-height:1.6;justify-self:end;text-align:right}
-  .req b{color:#eef3ef;font-weight:500}
-  footer a{text-decoration:none;border-bottom:1px solid rgba(134,167,149,.6)}
-  footer a:hover{color:#fff}
-
-  /* ── адаптив ── */
-  @media (max-width:1000px){
-    nav a:not(.btn){display:none}
-    .hero{padding:44px 0 72px}
-    .hero .wrap,.about .wrap,.review .wrap,.video .wrap{grid-template-columns:1fr;gap:48px}
-    .hero figure{max-width:560px}
-    .sect-head{grid-template-columns:1fr;gap:20px}
-    .sect-head > p{justify-self:start}
-    .feed{grid-template-columns:1fr 1fr}
-    .feed .ph-c{display:none}
-    .shop{grid-template-columns:1fr 1fr 1fr;gap:16px}
-    .review figure{max-width:300px}
-    .sect{padding:84px 0}
-  }
-  @media (max-width:640px){
-    .wrap{padding:0 16px}
-    body{font-size:16px}
-    .bar{height:64px}
-    .bar .logo img{height:28px}
-    nav .btn{min-height:40px;padding:0 16px}
-    .hero h1{font-size:clamp(52px,16vw,72px)}
-    .lead{font-size:17px}
-    .feed{grid-template-columns:1fr;gap:8px}
-    .feed > *{aspect-ratio:auto}
-    .feed .ph{aspect-ratio:16/10}
-    .post{min-height:300px;padding:28px 24px}
-    .shop{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px;padding:0 16px 8px;gap:12px;scrollbar-width:none}
-    .shop::-webkit-scrollbar{display:none}
-    .prod{flex:0 0 78%;scroll-snap-align:start}
-    .creds li{flex-direction:column;gap:2px}
-    .creds li span:last-child{text-align:left}
-    footer .wrap{grid-template-columns:1fr}
-    .req{justify-self:start;text-align:left}
-    .contact{padding:90px 0 84px}
-  }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Philosopher:ital,wght@0,400;0,700;1,400&family=Mulish:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "ProfessionalService", "@id": "https://tatianaopriapro-ai.github.io/#org", "name": "Тетяна Опря", "alternateName": "OPRIA Tatiana", "description": "Бізнес-консалтинг для власників і команд, психологічна практика, атмахілінг.", "url": "https://tatianaopriapro-ai.github.io/", "image": "https://tatianaopriapro-ai.github.io/img/og.jpg", "logo": "https://tatianaopriapro-ai.github.io/img/logo-teal.png", "telephone": "+380679800883", "email": "tatiana.myway@gmail.com", "priceRange": "60–900 EUR", "founder": {"@type": "Person", "name": "Тетяна Опря", "jobTitle": "Трансформаційний психолог, бізнес-консультант"}, "address": {"@type": "PostalAddress", "addressLocality": "Київ", "addressCountry": "UA"}, "areaServed": ["Київ", "Україна", "онлайн"], "sameAs": ["https://t.me/tatianaopria", "https://www.instagram.com/tatianaopria.pro", "https://youtube.com/@tatianaopria", "https://www.tiktok.com/@tatianaopria.pro", "https://www.facebook.com/t.oprya/"], "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Послуги", "itemListElement": [{"@type": "Offer", "price": "60", "priceCurrency": "EUR", "url": "https://tatianaopriapro-ai.github.io/magazyn.html", "itemOffered": {"@type": "Service", "name": "Первинна консультація, 60 хвилин"}}, {"@type": "Offer", "price": "300", "priceCurrency": "EUR", "url": "https://tatianaopriapro-ai.github.io/biznes-z-rozumom.html", "itemOffered": {"@type": "Service", "name": "Діагностика бізнесу"}}, {"@type": "Offer", "price": "900", "priceCurrency": "EUR", "url": "https://tatianaopriapro-ai.github.io/biznes-z-rozumom.html", "itemOffered": {"@type": "Service", "name": "Бізнес-консультування"}}, {"@type": "Offer", "price": "300", "priceCurrency": "EUR", "url": "https://tatianaopriapro-ai.github.io/biznes-z-rozumom.html", "itemOffered": {"@type": "Service", "name": "Інтеграція та супровід"}}, {"@type": "Offer", "price": "306", "priceCurrency": "EUR", "url": "https://tatianaopriapro-ai.github.io/atmakhilinh.html", "itemOffered": {"@type": "Service", "name": "Цикл сеансів атмахілінгу, персональний"}}, {"@type": "Offer", "price": "161", "priceCurrency": "EUR", "url": "https://tatianaopriapro-ai.github.io/atmakhilinh.html", "itemOffered": {"@type": "Service", "name": "Грошовий потік — атмахілінг, група"}}]}}
+</script>
+<link rel="preload" as="image" href="img/hero-work.webp" fetchpriority="high">
+<link rel="stylesheet" href="site.css">
 </head>
 <body>
 <a class="skip" href="#main">Перейти до змісту</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="ink" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="4"/><feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -8"/></filter><filter id="ink-s" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="2"/><feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -8"/></filter></svg>
 
 <header>
   <div class="wrap bar">
     <a class="logo" href="#" aria-label="Тетяна Опря — на початок"><img src="img/logo-teal.png" alt="OPRIA Tatiana" width="842" height="199"></a>
-    <nav aria-label="Основне меню">
+    <button class="burger" aria-label="Меню" aria-expanded="false" aria-controls="menu"><i></i><i></i><i></i></button>
+    <nav id="menu" aria-label="Основне меню">
       <a href="#napriamy">Напрями</a>
       <a href="#pro-mene">Про мене</a>
+      <a href="#start">З чого почати</a>
       <a href="#magazyn">Магазин</a>
+      <a href="#video">Відео</a>
       <a href="#kontakty">Контакти</a>
       <a class="btn" href="https://t.me/tatianaopria_pro" target="_blank" rel="noopener">Написати</a>
     </nav>
@@ -231,175 +53,409 @@
 
   <section class="hero">
     <div class="wrap">
-      <div>
-        <p class="cap">Бізнес-консалтинг · психологія · таро</p>
-        <h1>Тетяна Опря</h1>
-        <svg class="wave" viewBox="0 0 520 28" preserveAspectRatio="none" aria-hidden="true"><path d="M0 20 C 90 26, 170 26, 250 16 S 400 2, 520 10"/></svg>
-        <p class="lead">Допомагаю власникам бізнесу побачити, де губляться гроші, час і сили: у структурі, процесах чи стосунках між людьми. І вибудувати те, з чим компанія росте спокійно.</p>
+      <div class="hero-t">
+        <h1>Бізнес, у&nbsp;якому команда
+          <span class="rot" aria-live="off">
+            <span class="on">працює разом</span>
+            <span aria-hidden="true">чує одне одного</span>
+            <span aria-hidden="true">росте з&nbsp;вами</span>
+          </span>
+        </h1>
+        <p class="lead">Допомагаю власникам побачити приховані ризики й напругу в команді та структурі — і вибудувати процеси, відповідальність і комунікацію, з якими бізнес росте.</p>
         <div class="acts">
-          <a class="btn" href="https://tatianaopria.wayforpay.shop" target="_blank" rel="noopener">Записатися на консультацію</a>
-          <a class="tlink" href="#napriamy">Усі напрями роботи</a>
+          <button class="btn" type="button" data-order="Первинна консультація">Первинна консультація <span class="ar" aria-hidden="true">→</span></button>
+          <a class="tlink" href="#start">Підібрати формат</a>
         </div>
       </div>
       <figure>
-        <img src="img/IMG_1114.jpg" alt="Тетяна Опря сидить у кріслі в голубій сорочці" width="1066" height="1600" fetchpriority="high">
-        <figcaption>Трансформаційний психолог</figcaption>
+        <span class="ink" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+        <img src="img/hero-work.webp" alt="Тетяна Опря в пісочному костюмі з ноутбуком у руках" width="1100" height="1670" fetchpriority="high">
       </figure>
     </div>
   </section>
 
-  <section class="sect" id="napriamy" style="padding-top:40px">
-    <div class="wrap">
-      <div class="sect-head">
-        <div><p class="cap">Напрями</p><h2>З чим я працюю</h2></div>
-        <p>Від діагностики компанії до навчання й особистої підтримки. Оберіть те, що ближче до вашого запиту зараз.</p>
-      </div>
-
-      <div class="feed">
-        <a class="post p-teal" href="https://tatianaopria.wayforpay.shop" target="_blank" rel="noopener">
-          <span class="bird" aria-hidden="true"></span>
-          <div><h3>Бізнес-консалтинг</h3><p>Аналітика, SWOT-аналіз, діагностика структури управління, процесів і внутрішніх комунікацій.</p><span class="more">Детальніше</span></div>
-        </a>
-        <div class="ph"><img src="img/IMG_0963.jpg" alt="Тетяна Опря в бежевому жакеті біля вікна" loading="lazy" style="object-position:50% 25%"></div>
-        <a class="post p-sage" href="https://mindyourbusiness.wayforpay.shop/uk" target="_blank" rel="noopener">
-          <span class="bird" aria-hidden="true"></span>
-          <div><h3>«Бізнес з&nbsp;розумом»</h3><p>Програма для власників і керівників, які хочуть керувати бізнесом усвідомлено.</p><span class="more">Детальніше</span></div>
-        </a>
-        <div class="ph ph-c"><img src="img/tx-sphere.jpg" alt="" loading="lazy"></div>
-        <a class="post p-mint" href="https://masterstarot.wayforpay.shop" target="_blank" rel="noopener">
-          <span class="bird" aria-hidden="true"></span>
-          <div><h3>Курс таро</h3><p>Навчання роботі з картами таро: від основ до самостійної практики.</p><span class="more">Детальніше</span></div>
-        </a>
-        <a class="post p-white" href="https://www.instagram.com/tatianaopria.psy" target="_blank" rel="noopener">
-          <span class="bird" aria-hidden="true"></span>
-          <div><h3>«8 кроків» для жінок і&nbsp;матерів військових</h3><p>Програма психологічної підтримки для тих, хто чекає своїх рідних.</p><span class="more">Детальніше</span></div>
-        </a>
-      </div>
+  <section class="state" aria-label="Що я роблю">
+    <div class="wrap rv">
+      <p class="cap">Що я роблю</p>
+      <p class="big">Поєдную аналітичний погляд на бізнес із розумінням людей, які його створюють.</p>
+      <p class="sig"><b>Тетяна Опря</b><span>трансформаційний психолог</span></p>
     </div>
   </section>
 
-  <section class="sect about" id="pro-mene">
+  <section class="sect" id="napriamy">
     <div class="wrap">
-      <div class="pics">
-        <img src="img/IMG_1194.jpg" alt="Тетяна Опря на режисерському стільці" loading="lazy">
-        <img src="img/IMG_0809.jpg" alt="Руки з архівними фотографіями" loading="lazy">
-        <img src="img/tx-pampas.jpg" alt="" loading="lazy">
+      <div class="head rv">
+        <div><p class="cap">Напрями</p><h2>Чим я можу бути корисною</h2></div>
+        <p>Чотири формати роботи — від глибокої діагностики компанії до навчання й особистої підтримки.</p>
       </div>
-      <div>
+      <div class="dirs rv">
+        <a class="dir" href="konsaltynh.html">
+          <h3>Бізнес-консалтинг</h3>
+          <p>Аналітика, SWOT-аналіз, діагностика структури управління, процесів і внутрішніх комунікацій.</p>
+          <span class="go" aria-hidden="true">→</span>
+          <span class="im"><img src="img/dir-laptop.webp" alt="Тетяна Опря в синьому светрі працює за ноутбуком" width="700" height="1059" loading="lazy" style="object-position:60% 30%"></span>
+        </a>
+        <a class="dir" href="biznes-z-rozumom.html">
+          <h3>«Бізнес з&nbsp;розумом»</h3>
+          <p>Програма для власників і керівників, які хочуть керувати бізнесом усвідомлено.</p>
+          <span class="go" aria-hidden="true">→</span>
+          <span class="im"><img src="img/dir-white.webp" alt="Тетяна Опря в білому костюмі" width="700" height="1051" loading="lazy" style="object-position:50% 18%"></span>
+        </a>
+        <a class="dir" href="atmakhilinh.html">
+          <h3>Атмахілінг</h3>
+          <p>Інструмент глибинної роботи з несвідомим: сеанс працює на трьох рівнях — ментальному, чуттєвому й тілесному.</p>
+          <span class="go" aria-hidden="true">→</span>
+          <span class="im"><img src="img/dir-3.webp" alt="Руки розкладають на столику старі фотографії" width="700" height="1051" loading="lazy" style="object-position:50% 40%"></span>
+        </a>
+        <a class="dir" href="8-krokiv.html">
+          <h3>«8 кроків» для жінок і&nbsp;матерів військових</h3>
+          <p>Програма психологічної підтримки для тих, хто чекає своїх рідних.</p>
+          <span class="go" aria-hidden="true">→</span>
+          <span class="im"><img src="img/dir-letter.webp" alt="Руки тримають старий лист" width="700" height="1051" loading="lazy" style="object-position:50% 6%"></span>
+        </a>
+      </div>
+    </div>
+    <div class="scene" aria-hidden="true">
+      <img src="img/land-a.svg" alt="" width="1440" height="460" loading="lazy">
+      <span class="bird b1"></span><span class="bird b2"></span><span class="bird b3"></span>
+    </div>
+  </section>
+
+  <section class="sect about dark" id="pro-mene">
+    <div class="wrap">
+      <figure class="rv"><img src="img/about-chair.webp" alt="Тетяна Опря у блакитній сорочці сидить на режисерському стільці" width="900" height="1350" loading="lazy"></figure>
+      <div class="rv">
         <p class="cap">Про мене</p>
-        <h2>Ясність для бізнесу і&nbsp;для себе</h2>
-        <p class="says">Поєдную аналітичний погляд на бізнес із розумінням людей, які його створюють.</p>
-        <p class="t">Працюю з власниками та командами: знаходжу, де саме губляться гроші, час і енергія, — у структурі, процесах чи стосунках між людьми. Окремо веду психологічну практику та навчаю таро.</p>
+        <h2 class="h2">Тетяна Опря</h2>
+        <p class="t">Працюю з власниками та командами: знаходжу, де саме губляться гроші, час і енергія, — у структурі, процесах чи стосунках між людьми. Окремо веду психологічну практику.</p>
         <ul class="creds">
           <li><span>Диплом магістра</span><span>вища освіта</span></li>
           <li><span>Основи психологічної інтеграції</span><span>Fluence</span></li>
           <li><span>ThetaHealing® Basic та Advanced DNA</span><span>THInK</span></li>
           <li><span>Атмалогія. Деконструкція матриці долі</span><span>Atmalogiya</span></li>
-          <li><span>Таро</span><span>Soul Seasons</span></li>
         </ul>
-        <div class="certs" aria-label="Сертифікати">
-          <a href="img/cert1.jpg" target="_blank" rel="noopener"><img src="img/cert1.jpg" alt="Сертифікат Fluence" loading="lazy"></a>
-          <a href="img/cert4.jpg" target="_blank" rel="noopener"><img src="img/cert4.jpg" alt="Сертифікат ThetaHealing Advanced DNA" loading="lazy"></a>
-          <a href="img/cert5.jpg" target="_blank" rel="noopener"><img src="img/cert5.jpg" alt="Сертифікат ThetaHealing Basic DNA" loading="lazy"></a>
-          <a href="img/cert3.jpg" target="_blank" rel="noopener"><img src="img/cert3.jpg" alt="Сертифікат Atmalogiya" loading="lazy"></a>
-          <a href="img/cert2.jpg" target="_blank" rel="noopener"><img src="img/cert2.jpg" alt="Сертифікат таро" loading="lazy"></a>
+      </div>
+    </div>
+    <svg class="edge bot" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true" style="color:var(--sand)"><path d="M0 0H1440V17C1352 31 1268 9 1150 21S948 37 822 22 640 5 508 19 316 36 204 24 76 12 0 20Z"/></svg>
+  </section>
+
+  <section class="certs-sec" id="dyplomy" aria-labelledby="dyp-h">
+    <div class="wrap">
+      <div class="head rv">
+        <div><p class="cap">Дипломи</p><h2 id="dyp-h">Навчання й сертифікати</h2></div>
+        <p>Стрічка гортається сама. Наведіть на сертифікат, щоб прочитати про нього, або натисніть, щоб відкрити повністю.</p>
+      </div>
+    <div class="strip" tabindex="0" role="group" aria-roledescription="карусель" aria-label="Сертифікати">
+      <a href="img/cert1.webp" target="_blank" rel="noopener">
+        <span class="ci"><img src="img/cert1.webp" alt="Сертифікат Fluence" width="1260" height="900" loading="lazy">
+          <span class="info" aria-hidden="true"><span class="bird"></span><b>Fluence · 2025</b><span class="tx">Курс освітньої платформи Fluence для фахівців із психології. Сертифікат про завершення навчання.</span><i>Відкрити сертифікат →</i></span></span>
+        <span class="t">Основи психологічної інтеграції, Fluence</span><span class="d">Fluence · 2025. Курс освітньої платформи Fluence для фахівців із психології. Сертифікат про завершення навчання.</span></a>
+      <a href="img/cert4.webp" target="_blank" rel="noopener">
+        <span class="ci"><img src="img/cert4.webp" alt="Сертифікат ThetaHealing Advanced DNA" width="1260" height="900" loading="lazy">
+          <span class="info" aria-hidden="true"><span class="bird"></span><b>THInK · 2022</b><span class="tx">Поглиблений курс ThetaHealing® Institute of Knowledge. Дає кваліфікацію практика Advanced DNA.</span><i>Відкрити сертифікат →</i></span></span>
+        <span class="t">ThetaHealing® Advanced DNA</span><span class="d">THInK · 2022. Поглиблений курс ThetaHealing® Institute of Knowledge. Дає кваліфікацію практика Advanced DNA.</span></a>
+      <a href="img/cert5.webp" target="_blank" rel="noopener">
+        <span class="ci"><img src="img/cert5.webp" alt="Сертифікат ThetaHealing Basic DNA" width="1260" height="900" loading="lazy">
+          <span class="info" aria-hidden="true"><span class="bird"></span><b>THInK · 2022</b><span class="tx">Базовий курс ThetaHealing® Institute of Knowledge. Дає кваліфікацію практика Basic DNA.</span><i>Відкрити сертифікат →</i></span></span>
+        <span class="t">ThetaHealing® Basic DNA</span><span class="d">THInK · 2022. Базовий курс ThetaHealing® Institute of Knowledge. Дає кваліфікацію практика Basic DNA.</span></a>
+      <a href="img/cert-atm.webp" target="_blank" rel="noopener">
+        <span class="ci"><img src="img/cert-atm.webp" alt="Сертифікат Atmalogiya" width="1260" height="900" loading="lazy">
+          <span class="info" aria-hidden="true"><span class="bird"></span><b>Atmalogiya · 2019</b><span class="tx">Перший рівень авторської програми Ірини Іщенко, 106 академічних годин: генограми, метафоричні карти, робота зі стосунками.</span><i>Відкрити сертифікат →</i></span></span>
+        <span class="t">Атмалогія. Деконструкція матриці долі</span><span class="d">Atmalogiya · 2019. Перший рівень авторської програми Ірини Іщенко, 106 академічних годин: генограми, метафоричні карти, робота зі стосунками.</span></a>
+    </div>
+      <div class="car-nav">
+        <button class="car-b prev" type="button" aria-label="Попередній сертифікат">←</button>
+        <div class="dots"></div>
+        <button class="car-b next" type="button" aria-label="Наступний сертифікат">→</button>
+      </div>
+    </div>
+    <svg class="edge bot" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true" style="color:var(--paper)"><path d="M0 0H1440V17C1352 31 1268 9 1150 21S948 37 822 22 640 5 508 19 316 36 204 24 76 12 0 20Z"/></svg>
+  </section>
+
+  <section class="sect start" id="start" aria-labelledby="start-h">
+    <div class="wrap">
+      <figure class="rv"><img src="img/listen.webp" alt="Тетяна Опря сидить у кріслі й уважно слухає" width="800" height="1207" loading="lazy"></figure>
+      <div class="rv">
+        <p class="cap">З чого почати</p>
+        <h2 class="h2" id="start-h">Два питання — і&nbsp;ви знаєте, куди йти</h2>
+        <p class="sub">Не впевнені, який формат вам підходить? Відповідайте чесно — це забере пів хвилини.</p>
+        <ol class="steps" aria-hidden="true">
+          <li class="on" data-s="1">1 · Ваш запит</li><li data-s="2">2 · Уточнення</li><li data-s="3">3 · Рекомендація</li>
+        </ol>
+        <div class="quiz" aria-live="polite">
+          <div class="q on" data-q="1">
+            <h3>Про що ваш запит?</h3>
+            <div class="opts">
+              <button class="opt" data-go="biz">Бізнес, команда, управління</button>
+              <button class="opt" data-go="self">Особисте: стан, стосунки, підтримка</button>
+              <button class="opt" data-res="mind">Хочу навчитися керувати бізнесом</button>
+            </div>
+          </div>
+          <div class="q" data-q="biz">
+            <h3>Що вам зараз потрібніше?</h3>
+            <div class="opts">
+              <button class="opt" data-res="consult">Розібратися в конкретній ситуації в компанії</button>
+              <button class="opt" data-res="mind">Системно навчитися керувати бізнесом</button>
+            </div>
+          </div>
+          <div class="q" data-q="self">
+            <h3>Ваш чоловік, син чи близька людина — військовий?</h3>
+            <div class="opts">
+              <button class="opt" data-res="army">Так</button>
+              <button class="opt" data-res="talk">Ні</button>
+            </div>
+          </div>
+          <div class="q res" data-q="res">
+            <p class="cap">Вам підійде</p>
+            <h3 class="res-h"></h3>
+            <p class="res-p"></p>
+            <a class="btn gold res-b" href="#" target="_blank" rel="noopener"></a>
+            <button class="again" type="button">Пройти ще раз</button>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="sect" id="magazyn">
+  <section class="sect shop-sec" id="magazyn">
+    <svg class="edge top" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true" style="color:var(--paper)"><path d="M0 0H1440V17C1352 31 1268 9 1150 21S948 37 822 22 640 5 508 19 316 36 204 24 76 12 0 20Z"/></svg>
     <div class="wrap">
-      <div class="sect-head">
-        <div><p class="cap">Магазин</p><h2>Практики, сесії та прогнози</h2></div>
-        <p>Оплата онлайн через WayForPay: карткою, Apple Pay, Google Pay або частинами.</p>
+      <div class="head rv">
+        <div><p class="cap">Для бізнесу</p><h2>Послуги для бізнесу</h2></div>
+        <p>Три формати програми «Бізнес з розумом». Зустрічі проходять офлайн або онлайн, оплата онлайн.</p>
       </div>
-      <div class="shop">
-        <a class="prod" href="https://www.tatianaopria.com/prod/643524" target="_blank" rel="noopener">
-          <div class="im"><img src="https://cdn.wayforpay.shop/image/b37b55cfd264be85453811ac5df63760/de90dc93bfb83a4be50cb7b5b87c6827-9_wide.webp" alt="" loading="lazy"></div>
-          <h3>Жіноча майстерня</h3>
-          <div class="row"><span class="price">360 грн</span><span class="buy">Купити</span></div>
-        </a>
-        <a class="prod" href="https://www.tatianaopria.com/prod/695992" target="_blank" rel="noopener">
-          <div class="im"><img src="https://cdn.wayforpay.shop/image/b37b55cfd264be85453811ac5df63760/c8968f08de4832e9bc82b4891158054f-3_wide.webp" alt="" loading="lazy"></div>
-          <h3>Грошовий потік — атмахілінг група</h3>
-          <div class="row"><span class="price">7 920 грн</span><span class="buy">Купити</span></div>
-        </a>
-        <a class="prod" href="https://www.tatianaopria.com/prod/602967" target="_blank" rel="noopener">
-          <div class="im"><img src="https://cdn.wayforpay.shop/image/b37b55cfd264be85453811ac5df63760/948029462a8c78bd4e20a39d066e072e-0_wide.webp" alt="" loading="lazy"></div>
-          <h3>Первинна діагностика</h3>
-          <div class="row"><span class="price">60 €</span><span class="buy">Купити</span></div>
-        </a>
+      <div class="shop rv">
+        <article class="prod bz">
+          <div class="cover c1"><span class="cink" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="tag">Робоча зустріч · 3 години</span><span class="no">01</span><h3>Діагностика бізнесу</h3></div>
+          <ul class="bzl"><li>Діагностика цілей</li><li>Діагностика команди</li><li>Діагностика продукту</li></ul>
+          <dl class="bzm"><div><dt>Формат</dt><dd>робоча зустріч офлайн або онлайн</dd></div><div><dt>Тривалість</dt><dd>3 години</dd></div></dl>
+          <div class="bzp"><span class="price">300 €</span></div>
+          <div class="bzb"><button class="btn" type="button" data-order="Діагностика бізнесу">Замовити</button><a class="btn ghost" href="biznes-z-rozumom.html#formaty">Докладніше</a></div>
+        </article>
+        <article class="prod bz">
+          <div class="cover c2"><span class="cink" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="tag">Три рівні · принцип піраміди</span><span class="no">02</span><h3>Бізнес-консультування</h3></div>
+          <ul class="bzl"><li><b>Перший рівень, основа.</b> Робота з основною ідеєю, змістом і власниками бізнесу</li><li><b>Другий рівень, середина.</b> Робота з командою та основними бізнес-процесами</li><li><b>Третій рівень, вершина.</b> Робота з цілями та бажаним результатом</li></ul>
+          <dl class="bzm"><div><dt>Формат</dt><dd>робоча зустріч офлайн або онлайн</dd></div><div><dt>Тривалість</dt><dd>залежить від завдання та складності</dd></div></dl>
+          <div class="bzp"><span class="price">900 €</span><small>300 € за годину, мінімум 3 години на один рівень</small></div>
+          <div class="bzb"><button class="btn" type="button" data-order="Бізнес-консультування">Замовити</button><a class="btn ghost" href="biznes-z-rozumom.html#formaty">Докладніше</a></div>
+        </article>
+        <article class="prod bz">
+          <div class="cover c3"><span class="cink" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="tag">Зустріч · 90 хвилин</span><span class="no">03</span><h3>Інтеграція та супровід</h3></div>
+          <ul class="bzl"><li>Точкова робота з інтеграції та супроводу реалізованого проєкту з трансформації бізнесу</li><li>Відповіді на запитання</li><li>SWOT-аналіз поточної ситуації</li></ul>
+          <dl class="bzm"><div><dt>Формат</dt><dd>зустріч офлайн або онлайн</dd></div><div><dt>Тривалість</dt><dd>90 хвилин</dd></div></dl>
+          <div class="bzp"><span class="price">300 €</span></div>
+          <div class="bzb"><button class="btn" type="button" data-order="Інтеграція та супровід">Замовити</button><a class="btn ghost" href="biznes-z-rozumom.html#formaty">Докладніше</a></div>
+        </article>
       </div>
       <div class="shop-foot">
-        <span>Інші сесії, групи та записи практик — у магазині.</span>
-        <a class="tlink" href="https://www.tatianaopria.com/" target="_blank" rel="noopener">Увесь магазин →</a>
+        <span>Будь-яка робота починається з первинної консультації — 60 хвилин, 60 €.</span>
+        <a class="btn ghost" href="magazyn.html#p602967">Первинна консультація <span class="ar" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+    </div>
+    <svg class="edge bot" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true" style="color:var(--paper)"><path d="M0 0H1440V17C1352 31 1268 9 1150 21S948 37 822 22 640 5 508 19 316 36 204 24 76 12 0 20Z"/></svg>
+  </section>
+
+  <section class="sect review" id="vidhuky">
+    <div class="wrap">
+      <div class="rv"><p class="cap">Відгуки клієнтів</p><h2 class="h2" style="margin-bottom:6px">Що кажуть клієнти</h2></div>
+      <div class="rcar rv" data-carousel>
+        <div class="rtrack" tabindex="0" role="group" aria-roledescription="карусель" aria-label="Відгуки клієнтів">
+          <div class="rq"><div class="st" aria-label="5 із 5">★★★★★</div><p>Співпраця з Тетяною стала важливим етапом розвитку команди.</p><p>Завдяки глибокій аналітиці та SWOT-аналізу ми виявили приховані організаційні ризики.</p><p>Вибудували нові принципи відповідальності та комунікації — і це прямо вплинуло на зменшення конфліктів, дедлайни та залученість працівників.</p><div class="who"><b>Ірина</b>будівельна компанія, Київ · 2024</div></div>
+          <div class="rq"><div class="st" aria-label="5 із 5">★★★★★</div><p>Тетяна допомогла поглянути на наш бізнес під новим кутом. Ми провели діагностику команди, визначили слабкі місця в мотивації та управлінні графіками.</p><p>Завдяки структурованому підходу — з елементами SWOT-аналізу та персональних сесій — вдалося стабілізувати внутрішню атмосферу й повернути майстрам відчуття особистої значущості.</p><p>У результаті підвищилася лояльність клієнтів, скоротилася плинність і зросла ініціативність співробітників.</p><div class="who"><b>Марина</b>салон краси, Київ · 2025</div></div>
+          <div class="rq"><div class="st" aria-label="5 із 5">★★★★★</div><p>Робота з Тетяною Опря дала нам змогу комплексно налаштувати взаємодію між відділами.</p><p>За допомогою психодіагностики, стратегічного аналізу та коригування внутрішніх бізнес-процесів команда почала працювати злагодженіше й продуктивніше.</p><p>Ми впровадили регулярні практики зворотного зв'язку, моніторинг емоційного стану співробітників і оптимізували KPI. У результаті підвищилася якість обслуговування і знизилася плинність персоналу.</p><div class="who"><b>Владислав</b>клієнтський сервіс (кол-центр), Варшава · 2024</div></div>
+        </div>
+        <div class="car-nav">
+          <button class="car-b prev" type="button" aria-label="Попередній відгук">←</button>
+          <div class="dots"></div>
+          <button class="car-b next" type="button" aria-label="Наступний відгук">→</button>
+        </div>
+      </div>
+      <div class="rform-wrap rv" id="zalyshyty-vidhuk">
+        <button class="btn ghost" type="button" id="rf-open" aria-expanded="false" aria-controls="rform">Залишити відгук</button>
+        <form class="rform" id="rform" hidden>
+          <h3>Ваш відгук</h3>
+          <label>Ім'я<input name="n" required maxlength="60" autocomplete="given-name" placeholder="Як вас підписати"></label>
+          <label>Про що відгук<select name="s"><option>Бізнес-консалтинг</option><option>«Бізнес з розумом»</option><option>Атмахілінг</option><option>Первинна консультація</option><option>Програма «8 кроків»</option><option>Інше</option></select></label>
+          <label>Текст відгуку<textarea name="t" required rows="5" maxlength="1200" placeholder="З яким запитом ви прийшли і що змінилося"></textarea></label>
+          <label class="chk"><input type="checkbox" name="c" required><span>Погоджуюся, що мій відгук можуть опублікувати на сайті</span></label>
+          <div class="acts">
+            <button class="btn" type="submit" value="tg">Надіслати в Telegram</button>
+            <button class="btn ghost" type="submit" value="mail">Надіслати поштою</button>
+          </div>
+          <p class="rnote">Відгук відкриється у вашому Telegram або пошті — лишиться натиснути «Надіслати». На сайті він з'явиться після перевірки. Дані обробляються згідно з <a href="polityka.html">політикою конфіденційності</a>.</p>
+          <p class="rdone" hidden>Дякую! Якщо вікно з повідомленням не відкрилося, напишіть мені безпосередньо в <a href="https://t.me/tatianaopria_pro" target="_blank" rel="noopener">Telegram</a>.</p>
+        </form>
       </div>
     </div>
   </section>
 
-  <section class="sect review on-dark">
+  <section class="sect dark" id="video">
+    <svg class="edge top" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true" style="color:var(--paper)"><path d="M0 0H1440V17C1352 31 1268 9 1150 21S948 37 822 22 640 5 508 19 316 36 204 24 76 12 0 20Z"/></svg>
     <div class="wrap">
-      <figure><img src="img/tx-light.jpg" alt="" loading="lazy"></figure>
-      <div>
-        <p class="cap">Відгук</p>
-        <blockquote>«Співпраця з Тетяною стала важливим етапом розвитку команди. Завдяки глибокій аналітиці та SWOT-аналізу ми виявили приховані організаційні ризики. Вибудували нові принципи відповідальності та комунікації — і це прямо вплинуло на зменшення конфліктів, дедлайни та залученість працівників.»</blockquote>
-        <p class="who"><b>Ірина</b>, будівельна компанія, Київ, 2024</p>
+      <div class="head rv">
+        <div><p class="cap">YouTube</p><h2>Дивіться на каналі</h2></div>
+        <p>Розмови про жінок, стосунки й підтримку — та програма «8 кроків».</p>
+      </div>
+      <div class="vids rv">
+        <button class="yt" data-id="8SIh7wb8vqs" aria-label="Відтворити відео: програма «8 кроків» для жінок і матерів військових">
+          <span class="th"><img src="https://i.ytimg.com/vi/8SIh7wb8vqs/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span></span>
+          <span class="ttl">Програма «8 кроків» для жінок і матерів військових <small>13:35</small></span>
+        </button>
+        <div class="vlist">
+          <button class="yt" data-id="0f-T3gOtKMw" aria-label="Відтворити відео: Жінка = усмішка">
+            <span class="th"><img src="https://i.ytimg.com/vi/0f-T3gOtKMw/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span></span>
+            <span class="ttl">Жінка = усмішка <small>1:06:17</small></span>
+          </button>
+          <button class="yt" data-id="3y-gbesn1P4" aria-label="Відтворити відео: Бабуся = мудрість">
+            <span class="th"><img src="https://i.ytimg.com/vi/3y-gbesn1P4/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span></span>
+            <span class="ttl">Бабуся = мудрість <small>42:07</small></span>
+          </button>
+          <button class="yt" data-id="n4B8qgUUm80" aria-label="Відтворити відео: Мама і донька">
+            <span class="th"><img src="https://i.ytimg.com/vi/n4B8qgUUm80/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span></span>
+            <span class="ttl">Мама і донька <small>38:09</small></span>
+          </button>
+          <p style="margin-top:10px"><a class="tlink" href="https://youtube.com/@tatianaopria" target="_blank" rel="noopener">Усі відео на YouTube →</a></p>
+        </div>
       </div>
     </div>
+    <svg class="edge bot" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true" style="color:var(--paper)"><path d="M0 0H1440V17C1352 31 1268 9 1150 21S948 37 822 22 640 5 508 19 316 36 204 24 76 12 0 20Z"/></svg>
   </section>
 
-  <section class="sect video">
+  <section class="sect contact" id="kontakty">
     <div class="wrap">
-      <div>
-        <p class="cap">YouTube</p>
-        <h2>Програма «8&nbsp;кроків»</h2>
-        <p>Розмова про жінок, стосунки й підтримку тих, хто чекає рідних з війни.</p>
-        <a class="tlink" href="https://youtube.com/@tatianaopria" target="_blank" rel="noopener">Усі відео на каналі →</a>
+      <div class="rv">
+        <p class="cap">Контакти</p>
+        <h2>Напишіть мені</h2>
+        <p class="t">Найшвидше відповідаю в Telegram. Розкажіть коротко про ваш запит — і ми домовимося про зустріч.</p>
+        <div class="acts"><a class="btn" href="https://t.me/tatianaopria_pro" target="_blank" rel="noopener">Telegram @tatianaopria_pro <span class="ar" aria-hidden="true">→</span></a></div>
+        <ul class="links">
+          <li><a href="tel:+380679800883"><small>Телефон</small>+38 (067) 980-08-83</a></li>
+          <li><a href="mailto:tatiana.myway@gmail.com"><small>Email</small>tatiana.myway@gmail.com</a></li>
+          <li><a href="https://t.me/tatianaopria" target="_blank" rel="noopener"><small>Telegram-канал</small>t.me/tatianaopria</a></li>
+          <li><a href="https://www.instagram.com/tatianaopria.pro" target="_blank" rel="noopener"><small>Instagram</small>@tatianaopria.pro</a></li>
+          <li><a href="https://youtube.com/@tatianaopria" target="_blank" rel="noopener"><small>YouTube</small>@tatianaopria</a></li>
+          <li><a href="https://www.tiktok.com/@tatianaopria.pro" target="_blank" rel="noopener"><small>TikTok</small>@tatianaopria.pro</a></li>
+          <li><a href="https://www.facebook.com/t.oprya/" target="_blank" rel="noopener"><small>Facebook</small>t.oprya</a></li>
+          <li><a href="magazyn.html"><small>Магазин</small>Первинна консультація</a></li>
+        </ul>
       </div>
-      <button class="yt" data-id="8SIh7wb8vqs" aria-label="Відтворити відео: програма «8 кроків» для жінок і матерів військових">
-        <img src="https://i.ytimg.com/vi/8SIh7wb8vqs/hqdefault.jpg" alt="" loading="lazy">
-        <span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>
-      </button>
+      <figure class="rv"><img src="img/contact.webp" alt="Тетяна Опря усміхається, спершись на спинку стільця" width="900" height="1340" loading="lazy"></figure>
     </div>
-  </section>
-
-  <section class="contact" id="kontakty" style="background:var(--mint)">
-    <div class="wrap">
-      <span class="bird" aria-hidden="true"></span>
-      <h2>Напишіть мені</h2>
-      <svg class="wave" viewBox="0 0 440 28" preserveAspectRatio="none" aria-hidden="true"><path d="M0 18 C 80 26, 150 24, 220 14 S 350 2, 440 12"/></svg>
-      <p>Найшвидше відповідаю в Telegram. Розкажіть коротко про ваш запит, і ми домовимося про зустріч.</p>
-      <div class="acts"><a class="btn" href="https://t.me/tatianaopria_pro" target="_blank" rel="noopener">Telegram @tatianaopria_pro</a></div>
-      <div class="direct">
-        <a href="tel:+380679800883">+38 (067) 980-08-83</a>
-        <a href="mailto:tatiana.myway@gmail.com">tatiana.myway@gmail.com</a>
-      </div>
-      <div class="soc" aria-label="Соцмережі">
-        <a href="https://t.me/tatianaopria" target="_blank" rel="noopener">Telegram-канал</a>
-        <a href="https://www.instagram.com/tatianaopria.pro" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://youtube.com/@tatianaopria" target="_blank" rel="noopener">YouTube</a>
-        <a href="https://www.tiktok.com/@tatianaopria.pro" target="_blank" rel="noopener">TikTok</a>
-        <a href="https://www.facebook.com/t.oprya/" target="_blank" rel="noopener">Facebook</a>
-      </div>
+    <div class="scene low" aria-hidden="true">
+      <img src="img/land-b.svg" alt="" width="1440" height="330" loading="lazy">
+      <span class="bird b1"></span><span class="bird b2"></span>
     </div>
   </section>
 </main>
 
 <footer>
   <div class="wrap">
-    <img class="flogo" src="img/logo-main-ua-white.png" alt="OPRIA Tatiana — трансформаційний психолог" width="842" height="596" loading="lazy">
+    <img class="flogo" src="img/logo-main-gold.png" alt="OPRIA Tatiana" width="843" height="596" loading="lazy">
     <div class="req">
       <b>ФОП Опря Тетяна Володимирівна</b>
-      <span>Ідентифікаційний код: 3001710685</span>
+      <span>Ідентифікаційний код (РНОКПП): 3001710685</span>
       <span><a href="tel:+380679800883">+38 (067) 980-08-83</a> · <a href="mailto:tatiana.myway@gmail.com">tatiana.myway@gmail.com</a></span>
+      <span class="flinks"><a href="oferta.html">Публічна оферта</a> · <a href="oplata.html">Оплата і повернення</a> · <a href="polityka.html">Політика конфіденційності</a></span>
+      <span class="pay" aria-label="Способи оплати"><i>Visa</i><i>Mastercard</i><i>Apple Pay</i><i>Google Pay</i></span>
       <span>© 2026 Тетяна Опря</span>
     </div>
   </div>
 </footer>
 
 <script>
-  // YouTube вантажиться лише після натискання
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* меню на телефоні */
+  var burger = document.querySelector('.burger'), menu = document.getElementById('menu');
+  function setMenu(open){ menu.classList.toggle('open', open); burger.setAttribute('aria-expanded', open); }
+  burger.addEventListener('click', function(){ setMenu(!menu.classList.contains('open')); });
+  menu.addEventListener('click', function(e){ if (e.target.closest('a')) setMenu(false); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') setMenu(false); });
+
+  /* слова, що змінюються в заголовку */
+  var rot = [].slice.call(document.querySelectorAll('.rot span')), ri = 0;
+  if (!reduce && rot.length > 1) setInterval(function(){
+    var cur = rot[ri], next = rot[(ri + 1) % rot.length];
+    cur.classList.remove('on'); cur.classList.add('out');
+    next.classList.remove('out'); next.classList.add('on');
+    setTimeout(function(){ cur.classList.remove('out'); }, 800);
+    ri = (ri + 1) % rot.length;
+  }, 2800);
+
+  /* поява блоків при прокручуванні */
+  var rv = document.querySelectorAll('.rv');
+  if (reduce || !('IntersectionObserver' in window)) rv.forEach(function(el){ el.classList.add('in'); });
+  else {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {rootMargin:'0px 0px -8% 0px'});
+    rv.forEach(function(el){ io.observe(el); });
+  }
+
+  /* карусель сертифікатів */
+  (function(){
+    var strip = document.querySelector('.strip'), slides = strip.children, dots = document.querySelector('.dots');
+    var prev = document.querySelector('.car-b.prev'), next = document.querySelector('.car-b.next'), pages = 0;
+    function step(){ return slides[0].getBoundingClientRect().width + 20; }
+    function cur(){ return Math.round(strip.scrollLeft / step()); }
+    function go(i){ strip.scrollTo({left: i * step(), behavior: reduce ? 'auto' : 'smooth'}); }
+    function mark(){
+      var c = Math.min(cur(), pages - 1);
+      [].forEach.call(dots.children, function(d, i){ d.setAttribute('aria-current', i === c); });
+      prev.disabled = c <= 0; next.disabled = c >= pages - 1;
+    }
+    function build(){
+      var per = Math.max(1, Math.round((strip.clientWidth + 20) / step()));
+      pages = Math.max(1, slides.length - per + 1);
+      dots.innerHTML = '';
+      for (var i = 0; i < pages; i++) (function(i){
+        var d = document.createElement('button'); d.type = 'button';
+        d.setAttribute('aria-label', 'Сертифікат ' + (i + 1));
+        d.addEventListener('click', function(){ go(i); }); dots.appendChild(d);
+      })(i);
+      mark();
+    }
+    prev.addEventListener('click', function(){ go(cur() - 1); });
+    next.addEventListener('click', function(){ go(cur() + 1); });
+
+    /* автогортання: зупиняється, коли людина торкається каруселі */
+    var car = strip.parentNode, timer = 0, hold = false, seen = false;
+    function tick(){ if (!hold && seen && pages > 1) go(cur() >= pages - 1 ? 0 : cur() + 1); }
+    function pause(){ hold = true; }
+    function resume(){ hold = false; }
+    if (!reduce) {
+      timer = setInterval(tick, 3500);
+      ['pointerenter','focusin','touchstart'].forEach(function(e){ strip.addEventListener(e, pause, {passive:true}); });
+      ['pointerleave','focusout'].forEach(function(e){ strip.addEventListener(e, resume); });
+      strip.addEventListener('touchend', function(){ setTimeout(resume, 6000); }, {passive:true});
+      if ('IntersectionObserver' in window) new IntersectionObserver(function(es){ seen = es[0].isIntersecting; }, {threshold:.4}).observe(strip);
+      else seen = true;
+    }
+
+    /* перетягування мишкою */
+    var down = false, sx = 0, sl = 0, moved = false;
+    strip.addEventListener('pointerdown', function(e){ if (e.pointerType !== 'mouse') return; down = true; moved = false; sx = e.clientX; sl = strip.scrollLeft; });
+    addEventListener('pointermove', function(e){
+      if (!down) return; var d = e.clientX - sx;
+      if (Math.abs(d) > 6){ moved = true; strip.style.scrollSnapType = 'none'; strip.scrollLeft = sl - d; }
+    });
+    addEventListener('pointerup', function(){
+      if (!down) return; down = false;
+      if (moved){ strip.style.scrollSnapType = ''; go(cur()); }
+    });
+    strip.addEventListener('click', function(e){ if (moved){ e.preventDefault(); moved = false; } });
+    strip.addEventListener('dragstart', function(e){ e.preventDefault(); });
+    strip.addEventListener('scroll', mark, {passive:true});
+    strip.addEventListener('keydown', function(e){
+      if (e.key === 'ArrowRight'){ e.preventDefault(); go(cur() + 1); }
+      if (e.key === 'ArrowLeft'){ e.preventDefault(); go(cur() - 1); }
+    });
+    addEventListener('resize', build); build();
+  })();
+
+  /* YouTube вантажиться лише після натискання */
   document.querySelectorAll('.yt').forEach(function(b){
     b.addEventListener('click', function(){
       if (b.querySelector('iframe')) return;
@@ -407,9 +463,54 @@
       f.src = 'https://www.youtube-nocookie.com/embed/' + b.dataset.id + '?autoplay=1&rel=0';
       f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
       f.allowFullscreen = true; f.title = b.getAttribute('aria-label');
-      b.appendChild(f);
+      b.querySelector('.th').appendChild(f);
     });
   });
+
+  /* квіз «З чого почати» */
+  var R = {
+    consult:{h:'Бізнес-консалтинг', p:'Діагностика компанії: структура, процеси, команда. Знайдемо, що гальмує зростання і що з цим робити.', b:'Записатися', u:'konsaltynh.html'},
+    mind:{h:'«Бізнес з розумом»', p:'Програма, яка допоможе вибудувати систему управління й керувати бізнесом усвідомлено.', b:'Дізнатися більше', u:'biznes-z-rozumom.html'},
+    army:{h:'Програма «8 кроків»', p:'Психологічна підтримка для жінок і матерів військових.', b:'Перейти', u:'8-krokiv.html'},
+    talk:{h:'Первинна консультація', p:'60 хвилин діагностики: розбираємо ваш запит і підбираємо формат подальшої роботи.', b:'Записатися', u:'magazyn.html#p602967'}
+  };
+  var qs = document.querySelectorAll('.q'), steps = document.querySelectorAll('.steps li');
+  function show(id, step){
+    qs.forEach(function(q){ q.classList.toggle('on', q.dataset.q === id); });
+    steps.forEach(function(s){ s.classList.toggle('on', +s.dataset.s <= step); });
+  }
+  document.querySelectorAll('[data-go]').forEach(function(b){ b.addEventListener('click', function(){ show(b.dataset.go, 2); }); });
+  document.querySelectorAll('[data-res]').forEach(function(b){ b.addEventListener('click', function(){
+    var r = R[b.dataset.res];
+    document.querySelector('.res-h').textContent = r.h;
+    document.querySelector('.res-p').textContent = r.p;
+    var a = document.querySelector('.res-b'); a.textContent = r.b + ' →'; a.href = r.u; if (/^https?:/.test(r.u)) a.target = '_blank'; else a.removeAttribute('target');
+    show('res', 3);
+  }); });
+  document.querySelector('.again').addEventListener('click', function(){ show('1', 1); });
+})();
 </script>
+<script>
+/* форма «Залишити відгук»: без сервера — готовий текст відкривається в Telegram або пошті відвідувача */
+(function(){
+  var open = document.getElementById('rf-open'), form = document.getElementById('rform');
+  if (!open || !form) return;
+  open.addEventListener('click', function(){
+    form.hidden = !form.hidden; open.setAttribute('aria-expanded', !form.hidden);
+    if (!form.hidden) form.elements.n.focus();
+  });
+  if (location.hash === '#zalyshyty-vidhuk'){ form.hidden = false; open.setAttribute('aria-expanded', true); }
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var f = form.elements, via = (e.submitter && e.submitter.value) || 'tg';
+    var msg = 'Відгук для сайту\n\nІм\'я: ' + f.n.value.trim() + '\nПослуга: ' + f.s.value + '\n\n' + f.t.value.trim() + '\n\nЗгода на публікацію: так';
+    if (via === 'mail') location.href = 'mailto:tatiana.myway@gmail.com?subject=' + encodeURIComponent('Відгук для сайту') + '&body=' + encodeURIComponent(msg);
+    else window.open('https://t.me/tatianaopria_pro?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+    form.querySelector('.rdone').hidden = false;
+  });
+})();
+</script>
+<script src="carousel.js" defer></script>
+<script src="widget.js" defer></script>
 </body>
 </html>

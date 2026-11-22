@@ -70,7 +70,7 @@ button,select,input{font:inherit;color:inherit}
   <button class="b gold" id="save" type="button" disabled>Зберегти й опублікувати</button>
 </div>
 <div id="status" role="status" hidden></div>
-<iframe id="frame" sandbox="allow-same-origin" title="Сторінка сайту для редагування" hidden></iframe>
+<iframe id="frame" title="Сторінка сайту для редагування" hidden></iframe>
 <input id="file" type="file" accept="image/*" hidden>
 
 <script>
@@ -82,7 +82,7 @@ button,select,input{font:inherit;color:inherit}
   var pw = '', sha = '', path = '', dirty = false, uploads = [], targetImg = null, saving = false, changedWhileSaving = false;
 
   function say(text, kind){ statusEl.hidden = !text; statusEl.textContent = text || ''; statusEl.className = kind || ''; }
-  function setDirty(v){ dirty = v; if (v && saving) changedWhileSaving = true; saveBtn.disabled = !v || LOCAL || saving; undoBtn.disabled = !v; }
+  function setDirty(v){ dirty = v; if (v && saving) changedWhileSaving = true; saveBtn.disabled = LOCAL || saving; undoBtn.disabled = !v; }
   function api(body){
     body.pw = pw;
     return fetch(API, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body)})
@@ -131,7 +131,15 @@ button,select,input{font:inherit;color:inherit}
         'img{cursor:pointer}img:hover{outline:3px solid #c79d63;outline-offset:-3px}' +
         'html.__admh [hidden]{display:block!important;outline:1px dotted #86602f}</style>';
       frame.onload = prepare;
-      frame.srcdoc = j.content.replace(/<head([^>]*)>/i, function(m){ return m + base + css; });
+      /* скрипти сторінки в редакторі вимикаємо зміною типу (а не «пісочницею» — у Safari та на телефонах
+         вона блокувала й сам редактор); під час збереження типи повертаються */
+      var off = j.content.replace(/<script\b([^>]*)>/gi, function(m, attrs){
+        var t = /\btype\s*=\s*["']?([^"'\s>]+)/i.exec(attrs);
+        if (t && !/^(module|text\/javascript|application\/javascript)$/i.test(t[1])) return m; // дані, не код
+        var rest = t ? attrs.replace(/\btype\s*=\s*("[^"]*"|'[^']*'|[^\s>]+)/i, '') : attrs;
+        return '<script type="adm/off" data-adm-s="' + (t ? t[1] : '1') + '"' + rest + '>';
+      });
+      frame.srcdoc = off.replace(/<head([^>]*)>/i, function(m){ return m + base + css; });
     }).catch(function(){ say('Немає зв’язку із сервером.', 'err'); });
   }
 
@@ -202,11 +210,16 @@ button,select,input{font:inherit;color:inherit}
     Array.prototype.forEach.call(d.querySelectorAll('[data-adm]'), function(e){
       e.removeAttribute('contenteditable'); e.removeAttribute('data-adm'); e.removeAttribute('spellcheck');
     });
+    Array.prototype.forEach.call(d.querySelectorAll('script[data-adm-s]'), function(e){
+      var t = e.getAttribute('data-adm-s');
+      if (t === '1') e.removeAttribute('type'); else e.setAttribute('type', t);
+      e.removeAttribute('data-adm-s');
+    });
     var used = {};
     Array.prototype.forEach.call(d.querySelectorAll('img[data-adm-src]'), function(e){
       var p = e.getAttribute('data-adm-src'); used[p] = 1; e.setAttribute('src', p); e.removeAttribute('data-adm-src');
     });
-    return {html: '<!DOCTYPE html>\n' + d.outerHTML + '\n', images: uploads.filter(function(u){ return used[u.path]; })};
+    return {html: '<!DOCTYPE html>\n' + d.outerHTML.replace(/\s+<\/body>/, '\n</body>') + '\n', images: uploads.filter(function(u){ return used[u.path]; })};
   }
   saveBtn.addEventListener('click', function(){
     var out = serialize();
@@ -217,7 +230,7 @@ button,select,input{font:inherit;color:inherit}
       done();
       if (!j.ok){ saveBtn.disabled = false; say(why(j), 'err'); return; }
       sha = j.sha; uploads = []; setDirty(changedWhileSaving); changedWhileSaving = false;
-      say('Збережено. Зміни з’являться на сайті приблизно за хвилину.', 'ok');
+      say(j.same ? 'Змін на цій сторінці немає — зберігати нічого.' : 'Збережено. Зміни з’являться на сайті приблизно за хвилину.', 'ok');
     }).catch(function(){ done(); saveBtn.disabled = false; say('Немає зв’язку із сервером. Зміни не збережено.', 'err'); });
   });
   undoBtn.addEventListener('click', function(){ if (confirm('Скасувати всі незбережені зміни на цій сторінці?')) load(path); });

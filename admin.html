@@ -79,10 +79,10 @@ button,select,input{font:inherit;color:inherit}
   var LOCAL = /^(127\.0\.0\.1|localhost)$/.test(location.hostname); // локальний перегляд: без пароля й без збереження
   var $ = function(id){ return document.getElementById(id); };
   var frame = $('frame'), statusEl = $('status'), saveBtn = $('save'), undoBtn = $('undo'), pageSel = $('page');
-  var pw = '', sha = '', path = '', dirty = false, uploads = [], targetImg = null;
+  var pw = '', sha = '', path = '', dirty = false, uploads = [], targetImg = null, saving = false, changedWhileSaving = false;
 
   function say(text, kind){ statusEl.hidden = !text; statusEl.textContent = text || ''; statusEl.className = kind || ''; }
-  function setDirty(v){ dirty = v; saveBtn.disabled = !v || LOCAL; undoBtn.disabled = !v; }
+  function setDirty(v){ dirty = v; if (v && saving) changedWhileSaving = true; saveBtn.disabled = !v || LOCAL || saving; undoBtn.disabled = !v; }
   function api(body){
     body.pw = pw;
     return fetch(API, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body)})
@@ -92,7 +92,8 @@ button,select,input{font:inherit;color:inherit}
     if (j.status === 401) return 'Неправильний пароль.';
     if (j.status === 409) return 'Сторінку тим часом змінили в іншому місці. Перезавантажте її і внесіть правки ще раз.';
     if (j.error === 'admin-off') return 'Адмінку ще не ввімкнено: у воркері бракує пароля або ключа GitHub.';
-    return 'Не вдалося виконати дію. Спробуйте ще раз за хвилину.';
+    if (j.detail === 'github 401' || j.detail === 'github 403' || j.detail === 'github 404') return 'Ключ GitHub не має права запису в репозиторій сайту. Напишіть розробнику.';
+    return 'Не вдалося виконати дію. Спробуйте ще раз за хвилину.' + (j.status ? ' (код ' + j.status + (j.detail ? ', ' + j.detail : '') + ')' : '');
   }
 
   /* ── вхід ── */
@@ -143,7 +144,10 @@ button,select,input{font:inherit;color:inherit}
       if (!hasText) return;
       el.setAttribute('contenteditable', 'true'); el.setAttribute('data-adm', '1'); el.setAttribute('spellcheck', 'false');
     });
-    doc.addEventListener('input', function(){ setDirty(true); });
+    ['input', 'cut', 'drop', 'keyup'].forEach(function(ev){ doc.addEventListener(ev, function(e){
+      if (ev === 'keyup' && !(e.key === 'Backspace' || e.key === 'Delete')) return;
+      setDirty(true);
+    }); });
     doc.addEventListener('keydown', function(e){ if (e.key === 'Enter' && !e.shiftKey) e.preventDefault(); });
     doc.addEventListener('paste', function(e){
       e.preventDefault();
@@ -206,12 +210,15 @@ button,select,input{font:inherit;color:inherit}
   }
   saveBtn.addEventListener('click', function(){
     var out = serialize();
-    saveBtn.disabled = true; say('Зберігаю…');
+    if (saving) return;
+    saving = true; saveBtn.disabled = true; saveBtn.textContent = 'Зберігаю…'; say('Зберігаю… Це займає кілька секунд.');
+    var done = function(){ saving = false; saveBtn.textContent = 'Зберегти й опублікувати'; };
     api({kind: 'admin-save', path: path, sha: sha, content: out.html, images: out.images}).then(function(j){
+      done();
       if (!j.ok){ saveBtn.disabled = false; say(why(j), 'err'); return; }
-      sha = j.sha; uploads = []; setDirty(false);
+      sha = j.sha; uploads = []; setDirty(changedWhileSaving); changedWhileSaving = false;
       say('Збережено. Зміни з’являться на сайті приблизно за хвилину.', 'ok');
-    }).catch(function(){ saveBtn.disabled = false; say('Немає зв’язку із сервером. Зміни не збережено.', 'err'); });
+    }).catch(function(){ done(); saveBtn.disabled = false; say('Немає зв’язку із сервером. Зміни не збережено.', 'err'); });
   });
   undoBtn.addEventListener('click', function(){ if (confirm('Скасувати всі незбережені зміни на цій сторінці?')) load(path); });
   pageSel.addEventListener('change', function(){

@@ -513,8 +513,6 @@
 .fw-panel textarea{resize:vertical}
 .fw-panel input:focus-visible,.fw-panel textarea:focus-visible{outline:2px solid var(--gold-d);outline-offset:1px}
 .fw-panel .btn{width:100%;min-height:48px;margin-top:12px}
-.fw-pay{display:block;margin-top:16px;text-align:center;font:500 14px/1.4 var(--sans);color:var(--gold-d);text-decoration:none;border-bottom:0}
-.fw-pay:hover{text-decoration:underline}
 .fw-n{margin-top:12px;font-size:12.5px;line-height:1.5;color:var(--muted);text-align:center}
 .fw-n a{color:inherit}
 @media (max-width:640px){.fw{right:14px;bottom:14px}.fw-btn{min-height:52px;padding:0 20px 0 16px}}
@@ -634,3 +632,6 @@
 .fw-msg.err{background:#f6e6dc;color:#7a3b1d}
 .fw-msg a{color:inherit;font-weight:500}
 .btn:disabled{opacity:.6;cursor:default}
+.fw form .fw-pay{width:100%;margin-top:8px}
+.fw form .fw-pay[hidden]{display:none}
+.paid-ok{margin:0 0 28px;padding:16px 20px;background:#e4efe6;color:#22503a;border-radius:4px;font-size:17px;line-height:1.5}

@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Philosopher:ital,wght@0,400;0,700;1,400&family=Mulish:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="site.css?v=20261124h">
+<link rel="stylesheet" href="site.css?v=20261124j">
 </head>
 <body>
 <a class="skip" href="#main">Перейти до змісту</a>
@@ -48,6 +48,7 @@
       <h1>Оплата і повернення коштів</h1>
       <p class="upd">Редакція від 22 листопада 2026 року</p>
 
+      <p class="paid-ok" id="paid-ok" role="status" hidden>Дякую! Якщо оплата пройшла успішно, я зв'яжуся з вами протягом одного робочого дня, щоб узгодити час зустрічі.</p>
       <h2>Як оплатити</h2>
       <p>Послуги оплачуються онлайн банківською карткою Visa або Mastercard, а також через Apple Pay і Google Pay. Оплата проходить на захищеній сторінці платіжного сервісу: дані картки передаються в зашифрованому вигляді, і ми їх не отримуємо й не зберігаємо.</p>
       <p>Розрахунки проводяться в гривні. Якщо ціна на сайті вказана в євро, сума в гривні показується на сторінці оплати до підтвердження платежу.</p>
@@ -103,7 +104,8 @@
     </div>
   </div>
 </footer>
-<script src="site.js?v=20261124h" defer></script>
-<script src="widget.js?v=20261124h" defer></script>
+<script src="site.js?v=20261124j" defer></script>
+<script src="widget.js?v=20261124j" defer></script>
+<script>if(/[?&]paid=1/.test(location.search)){var p=document.getElementById('paid-ok');p.hidden=false;p.scrollIntoView({block:'center'});}</script>
 </body>
 </html>

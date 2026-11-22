@@ -1,5 +1,5 @@
 (function(){
-  var TG = 'https://t.me/tatianaopria_pro', MAIL = 'tatiana.myway@gmail.com', PAY = 'https://www.tatianaopria.com/prod/602967';
+  var TG = 'https://t.me/tatianaopria_pro', MAIL = 'tatiana.myway@gmail.com';
   var box = document.createElement('div');
   box.className = 'fw';
   box.innerHTML =
@@ -17,7 +17,6 @@
         '<button class="btn" type="submit">Надіслати заявку</button>' +
         '<p class="fw-msg" role="status" hidden></p>' +
       '</form>' +
-      '<a class="fw-pay" href="' + PAY + '" target="_blank" rel="noopener">Одразу оплатити консультацію →</a>' +
       '<p class="fw-n">Заявка одразу надходить Тетяні. Натискаючи кнопку, ви погоджуєтеся з <a href="polityka.html">політикою конфіденційності</a>.</p>' +
     '</div>';
   document.body.appendChild(box);

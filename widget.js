@@ -23,6 +23,7 @@
   document.body.appendChild(box);
   var btn = box.querySelector('.fw-btn'), panel = box.querySelector('.fw-panel'), form = box.querySelector('form'), topic = 'Первинна консультація';
   var PAYABLE = {'Первинна консультація': '602967', 'Цикл сеансів атмахілінгу, персональний': '618782', 'Грошовий потік — атмахілінг, група': '695992', 'Діагностика бізнесу': 'biz-diag', 'Бізнес-консультування': 'biz-cons', 'Інтеграція та супровід': 'biz-int'};
+  if (/[?&]test=1/.test(location.search)) PAYABLE['Первинна консультація'] = 'test'; /* перевірка оплати: 100 грн */
   var payBtn = box.querySelector('.fw-pay');
   var T0 = box.querySelector('.fw-t').textContent;
   function open(t){

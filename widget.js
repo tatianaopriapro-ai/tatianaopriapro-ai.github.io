@@ -3,7 +3,7 @@
   var box = document.createElement('div');
   box.className = 'fw';
   box.innerHTML =
-    '<button class="fw-btn" type="button" aria-expanded="false" aria-controls="fw-panel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg><span>Записатися</span></button>' +
+    '<button class="fw-btn" type="button" aria-expanded="false" aria-controls="fw-panel" aria-label="Записатися на консультацію"><span class="fw-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg></span><span class="fw-l">Записатися</span><span class="fw-more">на консультацію →</span></button>' +
     '<div class="fw-panel" id="fw-panel" role="dialog" aria-label="Замовити консультацію" hidden>' +
       '<button class="fw-x" type="button" aria-label="Закрити">×</button>' +
       '<p class="fw-cap">Первинна консультація</p>' +
@@ -34,6 +34,31 @@
     var o = e.target.closest('[data-order]');
     if (o){ e.preventDefault(); open(o.getAttribute('data-order')); }
   });
+  /* кнопка згортається в кружечок, коли під нею опиняється інша кнопка чи поле, і розгортається, коли місце вільне */
+  var IMPORTANT = '.btn, button, input, textarea, select, summary, .tlink, .links a, footer a, .pay, .price, .opt-p, .pprice';
+  var ticking = false;
+  function blocked(){
+    var W = window.innerWidth, H = window.innerHeight, small = W <= 640;
+    var right = W - (small ? 14 : 22), bottom = H - (small ? 14 : 22), w = small ? 176 : 196, h = small ? 54 : 60;
+    for (var ix = 0; ix < 5; ix++) for (var iy = 0; iy < 3; iy++){
+      var x = right - w + (w - 2) * ix / 4 + 1, y = bottom - h + (h - 2) * iy / 2 + 1;
+      var stack = document.elementsFromPoint(x, y);
+      for (var k = 0; k < stack.length; k++){
+        var el = stack[k];
+        if (box.contains(el)) continue;
+        if (el.closest && el.closest(IMPORTANT)) return true;
+        if (el === document.body || el === document.documentElement) break;
+      }
+    }
+    return false;
+  }
+  function check(){ ticking = false; if (!panel.hidden) return; box.classList.toggle('mini', blocked()); }
+  function ask(){ if (!ticking){ ticking = true; requestAnimationFrame(check); } }
+  window.addEventListener('scroll', ask, {passive:true});
+  window.addEventListener('resize', ask);
+  document.addEventListener('scroll', ask, {passive:true, capture:true});
+  setTimeout(check, 600);
+
   form.addEventListener('submit', function(e){
     e.preventDefault();
     var f = form.elements, via = (e.submitter && e.submitter.value) || 'tg';

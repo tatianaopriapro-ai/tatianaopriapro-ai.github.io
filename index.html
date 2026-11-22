@@ -27,7 +27,7 @@
 {"@context": "https://schema.org", "@type": "ProfessionalService", "@id": "https://tatianaopria.com/#org", "name": "Тетяна Опря", "alternateName": "OPRIA Tatiana", "description": "Бізнес-консалтинг для власників і команд, психологічна практика, атмахілінг.", "url": "https://tatianaopria.com/", "image": "https://tatianaopria.com/img/og.jpg", "logo": "https://tatianaopria.com/img/logo-teal.png", "telephone": "+380679800883", "email": "tatiana.myway@gmail.com", "priceRange": "60–900 EUR", "founder": {"@type": "Person", "name": "Тетяна Опря", "jobTitle": "Психолог, бізнес-консультант"}, "address": {"@type": "PostalAddress", "addressLocality": "Київ", "addressCountry": "UA"}, "areaServed": ["Київ", "Україна", "онлайн"], "sameAs": ["https://t.me/tatianaopria", "https://www.instagram.com/tatianaopria.pro", "https://youtube.com/@tatianaopria", "https://www.tiktok.com/@tatianaopria.pro", "https://www.facebook.com/t.oprya/"], "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Послуги", "itemListElement": [{"@type": "Offer", "price": "60", "priceCurrency": "EUR", "url": "https://tatianaopria.com/magazyn.html", "itemOffered": {"@type": "Service", "name": "Первинна консультація, 60 хвилин"}}, {"@type": "Offer", "price": "300", "priceCurrency": "EUR", "url": "https://tatianaopria.com/biznes-z-rozumom.html", "itemOffered": {"@type": "Service", "name": "Діагностика бізнесу"}}, {"@type": "Offer", "price": "900", "priceCurrency": "EUR", "url": "https://tatianaopria.com/biznes-z-rozumom.html", "itemOffered": {"@type": "Service", "name": "Бізнес-консультування"}}, {"@type": "Offer", "price": "300", "priceCurrency": "EUR", "url": "https://tatianaopria.com/biznes-z-rozumom.html", "itemOffered": {"@type": "Service", "name": "Інтеграція та супровід"}}, {"@type": "Offer", "price": "306", "priceCurrency": "EUR", "url": "https://tatianaopria.com/atmakhilinh.html", "itemOffered": {"@type": "Service", "name": "Цикл сеансів атмахілінгу, персональний"}}, {"@type": "Offer", "price": "161", "priceCurrency": "EUR", "url": "https://tatianaopria.com/atmakhilinh.html", "itemOffered": {"@type": "Service", "name": "Грошовий потік — атмахілінг, група"}}]}}
 </script>
 <link rel="preload" as="image" href="img/hero-work.webp" fetchpriority="high">
-<link rel="stylesheet" href="site.css?v=20261124f">
+<link rel="stylesheet" href="site.css?v=20261124g">
 </head>
 <body>
 <a class="skip" href="#main">Перейти до змісту</a>
@@ -288,11 +288,11 @@
           <label>Текст відгуку<textarea name="t" required rows="5" maxlength="1200" placeholder="З яким запитом ви прийшли і що змінилося"></textarea></label>
           <label class="chk"><input type="checkbox" name="c" required><span>Погоджуюся, що мій відгук можуть опублікувати на сайті</span></label>
           <div class="acts">
-            <button class="btn" type="submit" value="tg">Надіслати в Telegram</button>
-            <button class="btn ghost" type="submit" value="mail">Надіслати поштою</button>
+            <input class="fw-hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <button class="btn" type="submit">Надіслати відгук</button>
           </div>
-          <p class="rnote">Відгук відкриється у вашому Telegram або пошті — лишиться натиснути «Надіслати». На сайті він з'явиться після перевірки. Дані обробляються згідно з <a href="polityka.html">політикою конфіденційності</a>.</p>
-          <p class="rdone" hidden>Дякую! Якщо вікно з повідомленням не відкрилося, напишіть мені безпосередньо в <a href="https://t.me/tatianaopria_pro" target="_blank" rel="noopener">Telegram</a>.</p>
+          <p class="rnote">Відгук одразу надходить Тетяні й з'явиться на сайті після перевірки. Дані обробляються згідно з <a href="polityka.html">політикою конфіденційності</a>.</p>
+          <p class="rdone" role="status" hidden></p>
         </form>
       </div>
     </div>
@@ -510,15 +510,21 @@
   if (location.hash === '#zalyshyty-vidhuk'){ form.hidden = false; open.setAttribute('aria-expanded', true); }
   form.addEventListener('submit', function(e){
     e.preventDefault();
-    var f = form.elements, via = (e.submitter && e.submitter.value) || 'tg';
-    var msg = 'Відгук для сайту\n\nІм\'я: ' + f.n.value.trim() + '\nПослуга: ' + f.s.value + '\n\n' + f.t.value.trim() + '\n\nЗгода на публікацію: так';
-    if (via === 'mail') location.href = 'mailto:tatiana.myway@gmail.com?subject=' + encodeURIComponent('Відгук для сайту') + '&body=' + encodeURIComponent(msg);
-    else window.open('https://t.me/tatianaopria_pro?text=' + encodeURIComponent(msg), '_blank', 'noopener');
-    form.querySelector('.rdone').hidden = false;
+    var f = form.elements, done = form.querySelector('.rdone'), btn = form.querySelector('button[type=submit]');
+    var data = {kind: 'Відгук', topic: f.s.value, name: f.n.value.trim(), text: f.t.value.trim() + '\n\nЗгода на публікацію: так', website: f.website.value};
+    btn.disabled = true; btn.textContent = 'Надсилаю…'; done.hidden = true;
+    fetch('https://opria-forms.tatianaopria-pro.workers.dev/', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)})
+      .then(function(r){ if (!r.ok) throw new Error('bad'); return r.json(); })
+      .then(function(){ done.hidden = false; done.textContent = 'Дякую! Відгук отримано.'; form.reset(); btn.disabled = false; btn.textContent = 'Надіслати відгук'; })
+      .catch(function(){
+        btn.disabled = false; btn.textContent = 'Надіслати відгук'; done.hidden = false;
+        var txt = 'Відгук для сайту\n\nІм\'я: ' + data.name + '\nПослуга: ' + data.topic + '\n\n' + data.text;
+        done.innerHTML = 'Не вдалося надіслати. <a href="https://t.me/tatianaopria_pro?text=' + encodeURIComponent(txt) + '" target="_blank" rel="noopener">Написати в Telegram</a>';
+      });
   });
 })();
 </script>
-<script src="carousel.js?v=20261124f" defer></script>
-<script src="widget.js?v=20261124f" defer></script>
+<script src="carousel.js?v=20261124g" defer></script>
+<script src="widget.js?v=20261124g" defer></script>
 </body>
 </html>

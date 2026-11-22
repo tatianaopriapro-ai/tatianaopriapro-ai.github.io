@@ -13,11 +13,12 @@
         '<label>Ім\'я<input name="n" required maxlength="60" autocomplete="given-name"></label>' +
         '<label>Телефон або Telegram<input name="c" required maxlength="80" autocomplete="tel"></label>' +
         '<label>Ваш запит<textarea name="t" rows="3" maxlength="800" placeholder="Кілька слів про ситуацію"></textarea></label>' +
-        '<button class="btn" type="submit" value="tg">Надіслати в Telegram</button>' +
-        '<button class="btn ghost" type="submit" value="mail">Надіслати поштою</button>' +
+        '<input class="fw-hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">' +
+        '<button class="btn" type="submit">Надіслати заявку</button>' +
+        '<p class="fw-msg" role="status" hidden></p>' +
       '</form>' +
       '<a class="fw-pay" href="' + PAY + '" target="_blank" rel="noopener">Одразу оплатити консультацію →</a>' +
-      '<p class="fw-n">Повідомлення відкриється у вашому Telegram або пошті. <a href="polityka.html">Політика конфіденційності</a></p>' +
+      '<p class="fw-n">Заявка одразу надходить Тетяні. Натискаючи кнопку, ви погоджуєтеся з <a href="polityka.html">політикою конфіденційності</a>.</p>' +
     '</div>';
   document.body.appendChild(box);
   var btn = box.querySelector('.fw-btn'), panel = box.querySelector('.fw-panel'), form = box.querySelector('form'), topic = 'Первинна консультація';
@@ -59,11 +60,26 @@
   document.addEventListener('scroll', ask, {passive:true, capture:true});
   setTimeout(check, 600);
 
+  var API = 'https://opria-forms.tatianaopria-pro.workers.dev/';
+  var msgEl = box.querySelector('.fw-msg'), sendBtn = form.querySelector('button[type=submit]');
+  function say(text, ok){ msgEl.hidden = false; msgEl.textContent = text; msgEl.className = 'fw-msg ' + (ok ? 'ok' : 'err'); }
   form.addEventListener('submit', function(e){
     e.preventDefault();
-    var f = form.elements, via = (e.submitter && e.submitter.value) || 'tg';
-    var msg = 'Заявка з сайту: ' + topic + '\n\nІм\'я: ' + f.n.value.trim() + '\nКонтакт: ' + f.c.value.trim() + (f.t.value.trim() ? '\n\n' + f.t.value.trim() : '');
-    if (via === 'mail') location.href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent('Заявка з сайту: ' + topic) + '&body=' + encodeURIComponent(msg);
-    else window.open(TG + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+    var f = form.elements;
+    var data = {kind: 'Заявка', topic: topic, name: f.n.value.trim(), contact: f.c.value.trim(), text: f.t.value.trim(), website: f.website.value};
+    sendBtn.disabled = true; sendBtn.textContent = 'Надсилаю…'; msgEl.hidden = true;
+    fetch(API, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)})
+      .then(function(r){ if (!r.ok) throw new Error('bad'); return r.json(); })
+      .then(function(){
+        say('Дякую! Заявку отримано — я зв\'яжуся з вами найближчим часом.', true);
+        form.reset(); sendBtn.textContent = 'Надіслано';
+        setTimeout(function(){ sendBtn.disabled = false; sendBtn.textContent = 'Надіслати заявку'; }, 4000);
+      })
+      .catch(function(){
+        sendBtn.disabled = false; sendBtn.textContent = 'Надіслати заявку';
+        var txt = 'Заявка з сайту: ' + topic + '\n\nІм\'я: ' + data.name + '\nКонтакт: ' + data.contact + (data.text ? '\n\n' + data.text : '');
+        msgEl.hidden = false; msgEl.className = 'fw-msg err';
+        msgEl.innerHTML = 'Не вдалося надіслати. <a href="' + TG + '?text=' + encodeURIComponent(txt) + '" target="_blank" rel="noopener">Написати в Telegram</a>';
+      });
   });
 })();

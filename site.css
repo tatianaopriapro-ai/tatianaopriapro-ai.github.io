@@ -628,3 +628,9 @@
 .lic svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .links a:hover .lic{background:var(--teal-d);color:var(--gold-l);border-color:var(--teal-d);transform:rotate(-8deg) scale(1.06)}
 .links a:hover{padding-left:0}
+.fw-hp{position:absolute!important;left:-9999px;width:1px;height:1px;opacity:0}
+.fw-msg{margin-top:12px;padding:11px 14px;font-size:14.5px;line-height:1.45;border-radius:4px}
+.fw-msg.ok{background:#e4efe6;color:#22503a}
+.fw-msg.err{background:#f6e6dc;color:#7a3b1d}
+.fw-msg a{color:inherit;font-weight:500}
+.btn:disabled{opacity:.6;cursor:default}

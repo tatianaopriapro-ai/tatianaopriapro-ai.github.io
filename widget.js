@@ -29,7 +29,7 @@
     if (t){ topic = t; box.querySelector('.fw-cap').textContent = t; form.elements.t.value = 'Хочу замовити: ' + t; }
     payBtn.hidden = !PAYABLE[topic];
     var INFO = {'Цикл сеансів атмахілінгу, персональний': '306 €. Оплатіть онлайн або залиште заявку — узгодимо час і деталі.', 'Грошовий потік — атмахілінг, група': '161 €. Оплатіть онлайн або залиште заявку — надішлю розклад групи.'};
-    if (t) box.querySelector('.fw-t').textContent = INFO[t] || (t === 'Первинна консультація' ? T0 : 'Залиште контакти — я зв'яжуся з вами й відповім на запитання.');
+    if (t) box.querySelector('.fw-t').textContent = INFO[t] || (t === 'Первинна консультація' ? T0 : 'Залиште контакти — я напишу вам і відповім на запитання.');
     panel.hidden = false; btn.setAttribute('aria-expanded', true); box.classList.add('open');
     form.elements.n.focus();
   }

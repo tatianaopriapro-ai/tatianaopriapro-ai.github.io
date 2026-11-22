@@ -635,3 +635,4 @@
 .fw form .fw-pay{width:100%;margin-top:8px}
 .fw form .fw-pay[hidden]{display:none}
 .paid-ok{margin:0 0 28px;padding:16px 20px;background:#e4efe6;color:#22503a;border-radius:4px;font-size:17px;line-height:1.5}
+.fw-opt{font-weight:300;color:var(--muted)}

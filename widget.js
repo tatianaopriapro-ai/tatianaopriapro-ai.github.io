@@ -11,7 +11,8 @@
       '<p class="fw-t">60 хвилин · 60 €. Розповідаєте, що турбує, — разом формуємо запит і формат роботи.</p>' +
       '<form>' +
         '<label>Ім\'я<input name="n" required maxlength="60" autocomplete="given-name"></label>' +
-        '<label>Телефон або Telegram<input name="c" required maxlength="80" autocomplete="tel"></label>' +
+        '<label>Телефон<input name="c" type="tel" inputmode="tel" required maxlength="20" autocomplete="tel" placeholder="+380 67 123 45 67"></label>' +
+        '<label>Електронна пошта <span class="fw-opt">(необов’язково)</span><input name="e" type="email" maxlength="80" autocomplete="email" placeholder="name@example.com"></label>' +
         '<label>Ваш запит<textarea name="t" rows="3" maxlength="800" placeholder="Кілька слів про ситуацію"></textarea></label>' +
         '<input class="fw-hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">' +
         '<button class="btn" type="submit">Надіслати заявку</button>' +
@@ -66,13 +67,22 @@
   document.addEventListener('scroll', ask, {passive:true, capture:true});
   setTimeout(check, 600);
 
+  /* телефон: лише цифри, пробіли, дужки, дефіси й «+» на початку; 10–15 цифр */
+  var phone = form.elements.c;
+  function checkPhone(){
+    var v = phone.value.trim(), d = v.replace(/\D/g, '');
+    var ok = /^\+?[\d\s()\-]+$/.test(v) && d.length >= 10 && d.length <= 15;
+    phone.setCustomValidity(ok || !v ? '' : 'Вкажіть номер телефону повністю, наприклад +380 67 123 45 67');
+  }
+  phone.addEventListener('input', function(){ phone.value = phone.value.replace(/[^\d\s()+\-]/g, ''); checkPhone(); });
+  function contact(){ var e = form.elements.e.value.trim(); return phone.value.trim() + (e ? ', ' + e : ''); }
   var API = 'https://opria-forms.tatianaopria-pro.workers.dev/';
   var msgEl = box.querySelector('.fw-msg'), sendBtn = form.querySelector('button[type=submit]');
   function say(text, ok){ msgEl.hidden = false; msgEl.textContent = text; msgEl.className = 'fw-msg ' + (ok ? 'ok' : 'err'); }
   form.addEventListener('submit', function(e){
     e.preventDefault();
     var f = form.elements;
-    var data = {kind: 'Заявка', topic: topic, name: f.n.value.trim(), contact: f.c.value.trim(), text: f.t.value.trim(), website: f.website.value};
+    var data = {kind: 'Заявка', topic: topic, name: f.n.value.trim(), contact: contact(), text: f.t.value.trim(), website: f.website.value};
     sendBtn.disabled = true; sendBtn.textContent = 'Надсилаю…'; msgEl.hidden = true;
     fetch(API, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)})
       .then(function(r){ if (!r.ok) throw new Error('bad'); return r.json(); })
@@ -91,7 +101,7 @@
   payBtn.addEventListener('click', function(){
     if (!form.reportValidity()) return;
     var f = form.elements;
-    var data = {kind: 'pay', id: PAYABLE[topic], topic: topic, name: f.n.value.trim(), contact: f.c.value.trim(), text: f.t.value.trim(), website: f.website.value};
+    var data = {kind: 'pay', id: PAYABLE[topic], topic: topic, name: f.n.value.trim(), contact: contact(), text: f.t.value.trim(), website: f.website.value};
     payBtn.disabled = true; payBtn.textContent = 'Відкриваю оплату…'; msgEl.hidden = true;
     fetch(API, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)})
       .then(function(r){ return r.json(); })

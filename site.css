@@ -622,3 +622,9 @@
 .fw.mini .fw-btn:hover .fw-l,.fw.mini .fw-btn:focus-visible .fw-l{max-width:130px;opacity:1}
 @media (max-width:640px){.fw.mini .fw-btn{padding:0 6px}}
 @media (hover:none){.fw.mini .fw-btn:hover{padding:0 6px;gap:0}.fw.mini .fw-btn:hover .fw-l,.fw.mini .fw-btn:hover .fw-more{max-width:0;opacity:0}}
+.links a{display:grid;grid-template-columns:46px 1fr;column-gap:14px;align-items:center}
+.links a small{grid-column:2;align-self:end}
+.lic{grid-row:1/3;grid-column:1;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:#fffdf8;color:var(--teal-d);display:grid;place-items:center;transition:background .25s,color .25s,border-color .25s,transform .35s cubic-bezier(.2,.8,.2,1)}
+.lic svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.links a:hover .lic{background:var(--teal-d);color:var(--gold-l);border-color:var(--teal-d);transform:rotate(-8deg) scale(1.06)}
+.links a:hover{padding-left:0}

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Керування сайтом — Тетяна Опря</title>
+<link rel="icon" href="favicon.ico">
+<style>
+:root{--paper:#faf7f1;--sand:#eae1d2;--teal-d:#22383e;--teal:#2f4a52;--gold:#c79d63;--gold-d:#86602f;--muted:#6d7a7c;--line:#ddd3c2}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--teal-d);background:var(--paper);display:flex;flex-direction:column}
+button,select,input{font:inherit;color:inherit}
+.b{padding:9px 16px;border:1px solid var(--teal-d);border-radius:999px;background:var(--teal-d);color:#fff;cursor:pointer;white-space:nowrap}
+.b:hover{background:var(--teal)}
+.b:disabled{opacity:.5;cursor:default}
+.b.g{background:transparent;color:var(--teal-d)}
+.b.g:hover{background:var(--sand)}
+.b.gold{background:var(--gold);border-color:var(--gold);color:var(--teal-d)}
+/* вхід */
+#login{margin:auto;width:min(380px,calc(100% - 32px));padding:32px;background:#fff;border:1px solid var(--line);border-radius:10px}
+#login h1{margin:0 0 6px;font-size:22px}
+#login p{margin:0 0 18px;color:var(--muted)}
+#login input{width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:6px;background:var(--paper);margin-bottom:12px}
+#login .b{width:100%}
+#lerr{margin:12px 0 0;color:#8a3a1c;min-height:1.5em}
+/* панель */
+#bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:10px 16px;background:#fff;border-bottom:1px solid var(--line)}
+#bar strong{margin-right:6px}
+#bar select{padding:8px 12px;border:1px solid var(--line);border-radius:6px;background:var(--paper);max-width:100%}
+#bar label{display:flex;gap:6px;align-items:center;color:var(--muted);font-size:14px}
+#bar .sp{flex:1}
+#status{padding:8px 16px;font-size:14px;background:var(--sand);border-bottom:1px solid var(--line)}
+#status.ok{background:#e4efe6;color:#22503a}
+#status.err{background:#f6e6dc;color:#7a3b1d}
+#frame{flex:1;width:100%;border:0;background:#fff;min-height:0}
+[hidden]{display:none!important}
+@media (max-width:640px){#bar .sp{display:none}.b{padding:8px 12px}}
+</style>
+</head>
+<body>
+
+<form id="login" autocomplete="off">
+  <h1>Керування сайтом</h1>
+  <p>Введіть пароль адміністратора.</p>
+  <input id="pw" type="password" placeholder="Пароль" required autocomplete="current-password" aria-label="Пароль">
+  <button class="b" type="submit">Увійти</button>
+  <p id="lerr" role="alert"></p>
+</form>
+
+<div id="bar" hidden>
+  <strong>Сторінка:</strong>
+  <select id="page" aria-label="Сторінка для редагування">
+    <option value="index.html">Головна</option>
+    <option value="magazyn.html">Первинна консультація</option>
+    <option value="konsaltynh.html">Бізнес-консалтинг</option>
+    <option value="biznes-z-rozumom.html">«Бізнес з розумом»</option>
+    <option value="atmakhilinh.html">Атмахілінг</option>
+    <option value="8-krokiv.html">«8 кроків»</option>
+    <option value="oplata.html">Оплата і повернення</option>
+    <option value="oferta.html">Публічна оферта</option>
+    <option value="polityka.html">Політика конфіденційності</option>
+  </select>
+  <label><input id="showhidden" type="checkbox"> показати приховані блоки</label>
+  <span class="sp"></span>
+  <a class="b g" href="https://dash.cloudflare.com/?to=/:account/web-analytics" target="_blank" rel="noopener">Аналітика ↗</a>
+  <a class="b g" id="view" href="index.html" target="_blank" rel="noopener">Відкрити сайт ↗</a>
+  <button class="b g" id="undo" type="button" disabled>Скасувати зміни</button>
+  <button class="b gold" id="save" type="button" disabled>Зберегти й опублікувати</button>
+</div>
+<div id="status" role="status" hidden></div>
+<iframe id="frame" sandbox="allow-same-origin" title="Сторінка сайту для редагування" hidden></iframe>
+<input id="file" type="file" accept="image/*" hidden>
+
+<script>
+(function(){
+  var API = 'https://opria-forms.tatianaopria-pro.workers.dev/';
+  var LOCAL = /^(127\.0\.0\.1|localhost)$/.test(location.hostname); // локальний перегляд: без пароля й без збереження
+  var $ = function(id){ return document.getElementById(id); };
+  var frame = $('frame'), statusEl = $('status'), saveBtn = $('save'), undoBtn = $('undo'), pageSel = $('page');
+  var pw = '', sha = '', path = '', dirty = false, uploads = [], targetImg = null;
+
+  function say(text, kind){ statusEl.hidden = !text; statusEl.textContent = text || ''; statusEl.className = kind || ''; }
+  function setDirty(v){ dirty = v; saveBtn.disabled = !v || LOCAL; undoBtn.disabled = !v; }
+  function api(body){
+    body.pw = pw;
+    return fetch(API, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body)})
+      .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ j.status = r.status; return j; }); });
+  }
+  function why(j){
+    if (j.status === 401) return 'Неправильний пароль.';
+    if (j.status === 409) return 'Сторінку тим часом змінили в іншому місці. Перезавантажте її і внесіть правки ще раз.';
+    if (j.error === 'admin-off') return 'Адмінку ще не ввімкнено: у воркері бракує пароля або ключа GitHub.';
+    return 'Не вдалося виконати дію. Спробуйте ще раз за хвилину.';
+  }
+
+  /* ── вхід ── */
+  function enter(){
+    $('login').hidden = true; $('bar').hidden = false; frame.hidden = false;
+    load(pageSel.value);
+  }
+  $('login').addEventListener('submit', function(e){
+    e.preventDefault();
+    pw = $('pw').value;
+    $('lerr').textContent = 'Перевіряю…';
+    api({kind: 'admin-check'}).then(function(j){
+      if (j.ok){ try { sessionStorage.setItem('adm', pw); } catch(_){} enter(); }
+      else { $('lerr').textContent = why(j); }
+    }).catch(function(){ $('lerr').textContent = 'Немає зв’язку із сервером.'; });
+  });
+  if (LOCAL) enter();
+  else { try { pw = sessionStorage.getItem('adm') || ''; } catch(_){} if (pw) api({kind: 'admin-check'}).then(function(j){ if (j.ok) enter(); }); }
+
+  /* ── завантаження сторінки в редактор ── */
+  function load(p){
+    path = p; uploads = []; setDirty(false);
+    $('view').href = p;
+    say('Завантажую сторінку…');
+    var get = LOCAL
+      ? fetch(p + '?t=' + Date.now(), {cache: 'no-store'}).then(function(r){ return r.text(); }).then(function(t){ return {ok: true, content: t, sha: ''}; })
+      : api({kind: 'admin-load', path: p});
+    get.then(function(j){
+      if (!j.ok){ say(why(j), 'err'); return; }
+      sha = j.sha;
+      var base = '<base id="__admbase" href="' + location.href.replace(/[^\/]*$/, '') + '">';
+      var css = '<style id="__adm">.rv{opacity:1!important;transform:none!important}' +
+        '[data-adm]{outline:1px dashed transparent;outline-offset:2px;cursor:text}' +
+        '[data-adm]:hover{outline-color:#c79d63}[data-adm]:focus{outline:2px solid #c79d63;background:rgba(199,157,99,.12)}' +
+        'img{cursor:pointer}img:hover{outline:3px solid #c79d63;outline-offset:-3px}' +
+        'html.__admh [hidden]{display:block!important;outline:1px dotted #86602f}</style>';
+      frame.onload = prepare;
+      frame.srcdoc = j.content.replace(/<head([^>]*)>/i, function(m){ return m + base + css; });
+    }).catch(function(){ say('Немає зв’язку із сервером.', 'err'); });
+  }
+
+  function prepare(){
+    var doc = frame.contentDocument;
+    var SEL = 'h1,h2,h3,h4,h5,p,li,blockquote,figcaption,summary,dt,dd,td,th,cite,a,button,span,div,b,strong,em,small';
+    Array.prototype.forEach.call(doc.body.querySelectorAll(SEL), function(el){
+      if (el.closest('[contenteditable],script,style,svg,noscript,form,iframe')) return;
+      var hasText = Array.prototype.some.call(el.childNodes, function(n){ return n.nodeType === 3 && n.nodeValue.trim(); });
+      if (!hasText) return;
+      el.setAttribute('contenteditable', 'true'); el.setAttribute('data-adm', '1'); el.setAttribute('spellcheck', 'false');
+    });
+    doc.addEventListener('input', function(){ setDirty(true); });
+    doc.addEventListener('keydown', function(e){ if (e.key === 'Enter' && !e.shiftKey) e.preventDefault(); });
+    doc.addEventListener('paste', function(e){
+      e.preventDefault();
+      var t = (e.clipboardData || window.clipboardData).getData('text/plain').replace(/\s*\n\s*/g, ' ');
+      doc.execCommand('insertText', false, t);
+    });
+    doc.addEventListener('click', function(e){
+      var img = e.target.closest && e.target.closest('img');
+      if (img){ e.preventDefault(); targetImg = img; $('file').value = ''; $('file').click(); return; }
+      if (e.target.closest && e.target.closest('a,button,summary')) e.preventDefault();
+    }, true);
+    doc.addEventListener('submit', function(e){ e.preventDefault(); }, true);
+    doc.documentElement.classList.toggle('__admh', $('showhidden').checked);
+    say(LOCAL ? 'Локальний перегляд: зміни не зберігаються.' : 'Клацніть на текст, щоб змінити його, або на фото, щоб замінити. Потім натисніть «Зберегти й опублікувати».');
+  }
+
+  $('showhidden').addEventListener('change', function(){
+    if (frame.contentDocument) frame.contentDocument.documentElement.classList.toggle('__admh', this.checked);
+  });
+
+  /* ── заміна фото: зменшуємо до 1800 px і стискаємо у WebP ── */
+  $('file').addEventListener('change', function(){
+    var f = this.files[0], img = targetImg;
+    if (!f || !img) return;
+    say('Готую фото…');
+    createImageBitmap(f).then(function(bmp){
+      var k = Math.min(1, 1800 / Math.max(bmp.width, bmp.height));
+      var c = document.createElement('canvas'); c.width = Math.round(bmp.width * k); c.height = Math.round(bmp.height * k);
+      c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height);
+      c.toBlob(function(blob){
+        var rd = new FileReader();
+        rd.onload = function(){
+          var p = 'img/u' + Date.now().toString(36) + '.webp';
+          uploads.push({path: p, b64: String(rd.result).split(',')[1]});
+          img.setAttribute('data-adm-src', p);
+          img.removeAttribute('srcset');
+          if (img.hasAttribute('width') && img.hasAttribute('height')){ img.setAttribute('width', c.width); img.setAttribute('height', c.height); }
+          img.src = URL.createObjectURL(blob);
+          setDirty(true);
+          say('Фото замінено. Натисніть «Зберегти й опублікувати», щоб воно з’явилося на сайті.');
+        };
+        rd.readAsDataURL(blob);
+      }, 'image/webp', 0.85);
+    }).catch(function(){ say('Цей файл не вдалося відкрити як зображення.', 'err'); });
+  });
+
+  /* ── збереження ── */
+  function serialize(){
+    var d = frame.contentDocument.documentElement.cloneNode(true);
+    d.classList.remove('__admh'); if (!d.getAttribute('class')) d.removeAttribute('class');
+    Array.prototype.forEach.call(d.querySelectorAll('#__adm,#__admbase'), function(e){ e.remove(); });
+    Array.prototype.forEach.call(d.querySelectorAll('[data-adm]'), function(e){
+      e.removeAttribute('contenteditable'); e.removeAttribute('data-adm'); e.removeAttribute('spellcheck');
+    });
+    var used = {};
+    Array.prototype.forEach.call(d.querySelectorAll('img[data-adm-src]'), function(e){
+      var p = e.getAttribute('data-adm-src'); used[p] = 1; e.setAttribute('src', p); e.removeAttribute('data-adm-src');
+    });
+    return {html: '<!DOCTYPE html>\n' + d.outerHTML + '\n', images: uploads.filter(function(u){ return used[u.path]; })};
+  }
+  saveBtn.addEventListener('click', function(){
+    var out = serialize();
+    saveBtn.disabled = true; say('Зберігаю…');
+    api({kind: 'admin-save', path: path, sha: sha, content: out.html, images: out.images}).then(function(j){
+      if (!j.ok){ saveBtn.disabled = false; say(why(j), 'err'); return; }
+      sha = j.sha; uploads = []; setDirty(false);
+      say('Збережено. Зміни з’являться на сайті приблизно за хвилину.', 'ok');
+    }).catch(function(){ saveBtn.disabled = false; say('Немає зв’язку із сервером. Зміни не збережено.', 'err'); });
+  });
+  undoBtn.addEventListener('click', function(){ if (confirm('Скасувати всі незбережені зміни на цій сторінці?')) load(path); });
+  pageSel.addEventListener('change', function(){
+    if (dirty && !confirm('На цій сторінці є незбережені зміни. Перейти без збереження?')){ pageSel.value = path; return; }
+    load(pageSel.value);
+  });
+  window.addEventListener('beforeunload', function(e){ if (dirty){ e.preventDefault(); e.returnValue = ''; } });
+})();
+</script>
+</body>
+</html>

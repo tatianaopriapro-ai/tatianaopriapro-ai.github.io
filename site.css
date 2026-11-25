@@ -636,3 +636,9 @@
 .fw form .fw-pay[hidden]{display:none}
 .paid-ok{margin:0 0 28px;padding:16px 20px;background:#e4efe6;color:#22503a;border-radius:4px;font-size:17px;line-height:1.5}
 .fw-opt{font-weight:300;color:var(--muted)}
+.pub{margin-top:22px;padding-top:18px;border-top:1px solid var(--line);font-size:15.5px;line-height:1.55}
+.pub span{display:block;margin-bottom:4px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-d)}
+.pub a{color:inherit;text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:3px}
+.pub a:hover{color:var(--gold-d)}
+.doc h3{font-size:20px;line-height:1.25;color:var(--teal-d);margin:26px 0 6px}
+.doc ol{margin:12px 0 0 22px}

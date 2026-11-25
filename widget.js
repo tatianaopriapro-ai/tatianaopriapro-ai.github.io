@@ -1,5 +1,5 @@
 (function(){
-  var TG = 'https://t.me/tatianaopria_pro', MAIL = 'tatiana.myway@gmail.com';
+  var TG = 'https://t.me/tatianaopria_pro', MAIL = 'tatianaopria.pro@gmail.com';
   var box = document.createElement('div');
   box.className = 'fw';
   box.innerHTML =

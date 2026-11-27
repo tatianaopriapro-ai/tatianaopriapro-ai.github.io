@@ -39,6 +39,17 @@ button,select,input{font:inherit;color:inherit}
 #tabs button{flex:none;padding:7px 14px;border:1px solid var(--line);border-radius:999px;background:var(--paper);cursor:pointer;white-space:nowrap;font-size:14px}
 #tabs button:hover{background:var(--sand)}
 #tabs button[aria-current="page"]{background:var(--teal-d);border-color:var(--teal-d);color:#fff}
+#tabs button.pr{border-color:var(--gold);color:var(--gold-d);font-weight:600}
+#tabs button.pr[aria-current="page"]{background:var(--gold);color:var(--teal-d)}
+#prices{flex:1;overflow:auto;padding:28px 16px 60px}
+#prices>*{max-width:560px;margin-left:auto;margin-right:auto}
+#prices h1{font-size:24px;margin-top:0;margin-bottom:6px}
+#prices .pn{color:var(--muted);margin-top:0;margin-bottom:22px}
+#pform label{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+#pform label span{flex:1}
+#pform input{width:110px;padding:9px 12px;border:1px solid var(--line);border-radius:6px;background:#fff;text-align:right}
+#pform i{font-style:normal;color:var(--muted)}
+#psave{display:block;margin-top:24px}
 [hidden]{display:none!important}
 @media (max-width:640px){#bar .sp{display:none}.b{padding:8px 12px}}
 </style>
@@ -75,6 +86,12 @@ button,select,input{font:inherit;color:inherit}
 </div>
 <nav id="tabs" aria-label="Сторінки сайту" hidden></nav>
 <div id="status" role="status" hidden></div>
+<section id="prices" hidden>
+  <h1>Ціни</h1>
+  <p class="pn">Ціна в євро. Після збереження вона зміниться на всіх сторінках сайту, у вікні заявки й у сумі оплати. Списання йде в гривні за курсом НБУ на день оплати.</p>
+  <form id="pform" autocomplete="off"></form>
+  <button class="b gold" id="psave" type="button">Зберегти ціни</button>
+</section>
 <iframe id="frame" title="Сторінка сайту для редагування" hidden></iframe>
 <input id="file" type="file" accept="image/*" hidden>
 
@@ -87,7 +104,7 @@ button,select,input{font:inherit;color:inherit}
   var pw = '', sha = '', path = '', dirty = false, uploads = [], targetImg = null, saving = false, changedWhileSaving = false;
 
   function say(text, kind){ statusEl.hidden = !text; statusEl.textContent = text || ''; statusEl.className = kind || ''; }
-  function setDirty(v){ dirty = v; if (v && saving) changedWhileSaving = true; saveBtn.disabled = LOCAL || saving; undoBtn.disabled = !v; }
+  function setDirty(v){ dirty = v; if (v && saving) changedWhileSaving = true; saveBtn.disabled = LOCAL || saving || !path; undoBtn.disabled = !v; }
   function api(body){
     body.pw = pw;
     return fetch(API, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body)})
@@ -112,6 +129,87 @@ button,select,input{font:inherit;color:inherit}
     });
     tabs.appendChild(b);
   });
+  /* ── ціни ── */
+  var PRODUCTS = [
+    ['602967', 'Первинна консультація, 60 хв'],
+    ['618782', 'Цикл сеансів атмахілінгу, персональний'],
+    ['695992', 'Грошовий потік — атмахілінг, група'],
+    ['biz-diag', 'Діагностика бізнесу'],
+    ['biz-cons', 'Бізнес-консультування'],
+    ['biz-int', 'Інтеграція та супровід']
+  ];
+  var PRICE_PAGES = ['index.html', 'magazyn.html', 'konsaltynh.html', 'atmakhilinh.html', 'biznes-z-rozumom.html'];
+  var pricesEl = $('prices'), pform = $('pform'), psave = $('psave'), pricesSha = '';
+  PRODUCTS.forEach(function(pr){
+    var l = document.createElement('label');
+    l.innerHTML = '<span></span><input type="number" min="1" max="100000" step="1" inputmode="numeric" required><i>€</i>';
+    l.firstChild.textContent = pr[1]; l.querySelector('input').name = pr[0];
+    pform.appendChild(l);
+  });
+  var prTab = document.createElement('button'); prTab.type = 'button'; prTab.className = 'pr'; prTab.textContent = 'Ціни'; prTab.setAttribute('data-p', '#prices');
+  tabs.insertBefore(prTab, tabs.firstChild);
+  function inp(id){ return pform.querySelector('input[name="' + id + '"]'); }
+  function fmt(n){ return String(n).replace(/\B(?=(\d{3})+$)/g, ' '); }
+  function loadFile(p){
+    return LOCAL
+      ? fetch(p + '?t=' + Date.now(), {cache: 'no-store'}).then(function(r){ return r.text(); }).then(function(t){ return {ok: true, content: t, sha: ''}; })
+      : api({kind: 'admin-load', path: p});
+  }
+  function openPrices(){
+    if (dirty && !confirm('На цій сторінці є незбережені зміни. Перейти без збереження?')) return;
+    path = ''; uploads = []; setDirty(false); markTab('#prices');
+    frame.hidden = true; pricesEl.hidden = false; psave.disabled = true;
+    say('Завантажую ціни…');
+    loadFile('prices.json').then(function(j){
+      if (!j.ok){ say(why(j), 'err'); return; }
+      pricesSha = j.sha;
+      var cur = JSON.parse(j.content);
+      PRODUCTS.forEach(function(pr){ inp(pr[0]).value = cur[pr[0]] || ''; });
+      psave.disabled = LOCAL;
+      say(LOCAL ? 'Локальний перегляд: зміни не зберігаються.' : 'Змініть потрібні ціни й натисніть «Зберегти ціни».');
+    }).catch(function(){ say('Немає зв\u2019язку із сервером.', 'err'); });
+  }
+  prTab.addEventListener('click', openPrices);
+  /* підставляє нові ціни в текст сторінки: позначені місця, заголовок і дані для пошуковиків */
+  function applyPrices(html, pr){
+    PRODUCTS.forEach(function(x){
+      var re = new RegExp('(<[^<>]*\\bdata-price="' + x[0] + '"[^<>]*>)[^<]*', 'g');
+      html = html.replace(re, function(m, tag){ return tag + fmt(pr[x[0]]) + ' €'; });
+    });
+    var first = fmt(pr['602967']) + ' €';
+    html = html.replace(/(<title>[^<]*хвилин, )[\d\s]+€/, function(m, a){ return a + first; });
+    html = html.replace(/(property="og:title" content="[^"]*хвилин, )[\d\s]+€/, function(m, a){ return a + first; });
+    var order = ['602967', 'biz-diag', 'biz-cons', 'biz-int', '618782', '695992'], k = 0;
+    html = html.replace(/("@type": "Offer", "price": ")\d+(")/g, function(m, a, b){ var id = order[k++]; return id ? a + pr[id] + b : m; });
+    var all = PRODUCTS.map(function(x){ return pr[x[0]]; });
+    html = html.replace(/("priceRange": ")[^"]*(")/, function(m, a, b){ return a + Math.min.apply(null, all) + '–' + Math.max.apply(null, all) + ' EUR' + b; });
+    return html;
+  }
+  psave.addEventListener('click', function(){
+    if (!pform.reportValidity()) return;
+    var pr = {};
+    PRODUCTS.forEach(function(x){ pr[x[0]] = parseInt(inp(x[0]).value, 10); });
+    psave.disabled = true; psave.textContent = 'Зберігаю…'; say('Зберігаю ціни… Це займає до пів хвилини.');
+    var files = [{path: 'prices.json', content: JSON.stringify(pr, null, 2) + '\n', sha: pricesSha}];
+    var chain = Promise.resolve();
+    PRICE_PAGES.forEach(function(p){
+      chain = chain.then(function(){ return loadFile(p); }).then(function(j){
+        if (!j.ok) throw j;
+        var next = applyPrices(j.content, pr);
+        if (next !== j.content) files.push({path: p, content: next, sha: j.sha});
+      });
+    });
+    chain.then(function(){ return api({kind: 'admin-save', files: files}); }).then(function(j){
+      psave.disabled = false; psave.textContent = 'Зберегти ціни';
+      if (!j.ok){ say(why(j), 'err'); return; }
+      pricesSha = (j.shas && j.shas['prices.json']) || pricesSha;
+      say(j.same ? 'Ціни не змінилися — зберігати нічого.' : 'Ціни збережено. На сайті й в оплаті вони оновляться приблизно за хвилину.', 'ok');
+    }).catch(function(j){
+      psave.disabled = false; psave.textContent = 'Зберегти ціни';
+      say(j && j.status ? why(j) : 'Немає зв\u2019язку із сервером. Ціни не збережено.', 'err');
+    });
+  });
+
   function markTab(p){
     Array.prototype.forEach.call(tabs.children, function(b){
       if (b.getAttribute('data-p') === p){ b.setAttribute('aria-current', 'page'); b.scrollIntoView({block: 'nearest', inline: 'nearest'}); }
@@ -138,7 +236,7 @@ button,select,input{font:inherit;color:inherit}
 
   /* ── завантаження сторінки в редактор ── */
   function load(p){
-    path = p; uploads = []; setDirty(false); markTab(p);
+    path = p; uploads = []; setDirty(false); markTab(p); pricesEl.hidden = true; frame.hidden = false;
     $('view').href = p;
     say('Завантажую сторінку…');
     var get = LOCAL
@@ -170,7 +268,7 @@ button,select,input{font:inherit;color:inherit}
     var doc = frame.contentDocument;
     var SEL = 'h1,h2,h3,h4,h5,p,li,blockquote,figcaption,summary,dt,dd,td,th,cite,a,button,span,div,b,strong,em,small';
     Array.prototype.forEach.call(doc.body.querySelectorAll(SEL), function(el){
-      if (el.closest('[contenteditable],script,style,svg,noscript,form,iframe')) return;
+      if (el.closest('[contenteditable],script,style,svg,noscript,form,iframe') || el.hasAttribute('data-price')) return;
       var hasText = Array.prototype.some.call(el.childNodes, function(n){ return n.nodeType === 3 && n.nodeValue.trim(); });
       if (!hasText) return;
       el.setAttribute('contenteditable', 'true'); el.setAttribute('data-adm', '1'); el.setAttribute('spellcheck', 'false');

@@ -26,11 +26,22 @@
   var PAYABLE = {'Первинна консультація': '602967', 'Цикл сеансів атмахілінгу, персональний': '618782', 'Грошовий потік — атмахілінг, група': '695992', 'Діагностика бізнесу': 'biz-diag', 'Бізнес-консультування': 'biz-cons', 'Інтеграція та супровід': 'biz-int'};
   var payBtn = box.querySelector('.fw-pay');
   var T0 = box.querySelector('.fw-t').textContent;
+  /* актуальні ціни зберігаються в prices.json — їх змінюють в адмінці */
+  var P = {};
+  function fmt(n){ return String(n).replace(/\B(?=(\d{3})+$)/g, ' '); }
+  fetch('prices.json', {cache: 'no-cache'}).then(function(r){ return r.json(); }).then(function(j){
+    P = j || {};
+    if (P['602967']){
+      T0 = T0.replace(/· [\d\s]+€/, '· ' + fmt(P['602967']) + ' €');
+      if (topic === 'Первинна консультація') box.querySelector('.fw-t').textContent = T0;
+    }
+  }).catch(function(){});
   function open(t){
     if (t){ topic = t; box.querySelector('.fw-cap').textContent = t; form.elements.t.value = 'Хочу замовити: ' + t; }
     payBtn.hidden = !PAYABLE[topic];
     var INFO = {'Цикл сеансів атмахілінгу, персональний': '306 €. Оплатіть онлайн або залиште заявку — узгодимо час і деталі.', 'Грошовий потік — атмахілінг, група': '161 €. Оплатіть онлайн або залиште заявку — надішлю розклад групи.', 'Діагностика бізнесу': '300 €. Оплатіть онлайн або залиште заявку — узгодимо час і деталі.', 'Бізнес-консультування': '900 €. Оплатіть онлайн або залиште заявку — узгодимо час і деталі.', 'Інтеграція та супровід': '300 €. Оплатіть онлайн або залиште заявку — узгодимо час і деталі.'};
     if (t) box.querySelector('.fw-t').textContent = INFO[t] || (t === 'Первинна консультація' ? T0 : 'Залиште контакти — я напишу вам і відповім на запитання.');
+    if (t && INFO[t] && P[PAYABLE[t]]) box.querySelector('.fw-t').textContent = INFO[t].replace(/^[\d\s]+€/, fmt(P[PAYABLE[t]]) + ' €');
     panel.hidden = false; btn.setAttribute('aria-expanded', true); box.classList.add('open');
     form.elements.n.focus();
   }
